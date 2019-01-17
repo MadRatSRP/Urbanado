@@ -1,8 +1,8 @@
-package ui;
+package ui
 
-import android.content.Context;
+import android.content.Context
 
-public class WebService {
+class WebService {
     /*private RequestQueue mRequestQueue;
     private static WebService apiRequests = null;
     private String url = "http://hacaton2018app.herokuapp.com/events";
@@ -15,7 +15,7 @@ public class WebService {
         return apiRequests;
     }*/
 
-    public void updateProfile(Context context, String discription, String title, String address, String koord /*File file,*/ /*Response.Listener<String> listener, Response.ErrorListener errorListener*/) {
+    fun updateProfile(context: Context, discription: String, title: String, address: String, koord: String /*File file,*/ /*Response.Listener<String> listener, Response.ErrorListener errorListener*/) {
         /*SimpleMultiPartRequest events = new SimpleMultiPartRequest(Request.Method.POST, url, listener, errorListener);
 //        request.setParams(data);
         mRequestQueue = RequestManager.getnstance(context);
