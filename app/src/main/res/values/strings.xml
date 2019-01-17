@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Urbanido</string>
+    <string name="hint_description">Опишите мероприятие</string>
+    <string name="hint_title">Название мероприятия</string>
+
+    <string name="network_service_error">ddd</string>
+    <string name="invalid_long_lat">aaa</string>
+    <string name="no_address_found">bbb</string>
+    <string name="address_found">ccc</string>
+
+    <string-array name="events_values">
+        <item>Кино</item>
+        <item>Театр</item>
+        <item>Выставка</item>
+        <item>Концерт</item>
+    </string-array>
+
+
+    <string name="map">Map</string>
+    <string name="form">Form</string>
+</resources>
