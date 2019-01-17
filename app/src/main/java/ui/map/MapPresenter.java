@@ -1,9 +1,9 @@
 package ui.map;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class MapPresenter implements MapVP.Presenter{
-    MapVP.View mv;
+    private MapVP.View mv;
 
     public MapPresenter(MapVP.View mv) {
         this.mv = mv;

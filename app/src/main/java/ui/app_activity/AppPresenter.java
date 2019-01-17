@@ -1,9 +1,9 @@
 package ui.app_activity;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class AppPresenter implements AppVP.Presenter{
-    AppVP.View av;
+    private AppVP.View av;
 
     public AppPresenter(AppVP.View av) {
         this.av = av;

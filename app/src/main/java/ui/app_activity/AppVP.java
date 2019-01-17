@@ -1,6 +1,6 @@
 package ui.app_activity;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public interface AppVP {
 

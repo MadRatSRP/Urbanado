@@ -5,15 +5,14 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,7 +29,7 @@ import java.util.Locale;
 import idd.urbanido.R;
 import ui.form.FormFragment;
 
-import static android.support.v4.content.ContextCompat.checkSelfPermission;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class MapFragment extends Fragment
     implements MapVP.View, OnMapReadyCallback {
