@@ -31,33 +31,28 @@ import java.util.Locale
 import idd.urbanido.R
 
 import android.app.Activity.RESULT_OK
+import kotlinx.android.synthetic.main.fragment_form.*
 
 class FormFragment : Fragment() {
 
-    internal var spinner: Spinner
-    internal var edit_title: EditText
-    internal var edit_description: EditText
-    internal var show_address: TextView
-    internal var showDate: TextView
-    internal var showTime: TextView
-    internal var load_image: Button
-    internal var upload: Button
-    internal var imageView: ImageView
-    internal var bitmapImage: Bitmap
+    //internal var bitmapImage: Bitmap
 
-    internal var setTime: Button? = null
-    internal var setDate: Button? = null
+    //val bitmap:Bitmap
 
-    internal var mYear: Int = 0
-    internal var mMonth: Int = 0
-    internal var mDay: Int = 0
-
-    private val dateAndTime = Calendar.getInstance()
-    internal val newCalendar = Calendar.getInstance()
+    //private val dateAndTime = Calendar.getInstance()
+    //internal val newCalendar = Calendar.getInstance()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        load_image.setOnClickListener { v: View ->
+
+        show_address.text = address
+
+        val adapter = ArrayAdapter.createFromResource(context!!,
+                R.array.events_values, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        events_spinner.adapter = adapter
+
+        load_image.setOnClickListener {
             if (ActivityCompat.checkSelfPermission(activity!!,
                             Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
@@ -67,14 +62,19 @@ class FormFragment : Fragment() {
                 startGallery()
             }
         }
-        showDate.setOnClickListener { v: View ->
+
+        upload.setOnClickListener{
+            //uploadData();
+        }
+
+        showDate.setOnClickListener {
             val mcurrentDate = Calendar.getInstance()
-            mYear = mcurrentDate.get(Calendar.YEAR)
-            mMonth = mcurrentDate.get(Calendar.MONTH)
-            mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH)
+            var mYear = mcurrentDate.get(Calendar.YEAR)
+            var mMonth = mcurrentDate.get(Calendar.MONTH)
+            var mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH)
 
             val mDatePicker = DatePickerDialog(context!!,
-                    { datepicker, selectedyear, selectedmonth, selectedday ->
+                    { _, selectedyear, selectedmonth, selectedday ->
 
                         val myCalendar = Calendar.getInstance()
                         myCalendar.set(Calendar.YEAR, selectedyear)
@@ -90,13 +90,14 @@ class FormFragment : Fragment() {
                     }, mYear, mMonth, mDay)
             mDatePicker.show()
         }
-        showTime.setOnClickListener { v: View ->
+
+        showTime.setOnClickListener {
             val mcurrentTime = Calendar.getInstance()
             val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
             val minute = mcurrentTime.get(Calendar.MINUTE)
             val mTimePicker: TimePickerDialog
             mTimePicker = TimePickerDialog(context,
-                    { timePicker, selectedHour, selectedMinute ->
+                    { _, selectedHour, selectedMinute ->
 
                         showTime.text = selectedHour.toString() + ":" + selectedMinute
                     },
@@ -104,8 +105,6 @@ class FormFragment : Fragment() {
             mTimePicker.setTitle("Select Time")
             mTimePicker.show()
         }
-
-
     }
 
     private fun startGallery() {
@@ -117,19 +116,19 @@ class FormFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //super method removed
         if (resultCode == RESULT_OK) {
             if (requestCode == 1000) {
                 val returnUri = data!!.data
+                val bitmap:Bitmap
                 try {
-                    bitmapImage = MediaStore.Images.Media.getBitmap(activity!!
+                    bitmap = MediaStore.Images.Media.getBitmap(activity!!
                             .applicationContext.contentResolver, returnUri)
                 } catch (ex: FileNotFoundException) {
                     ex.printStackTrace()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 } finally {
-                    imageView.setImageBitmap(bitmapImage)
+                    image_container.setImageBitmap(bitmap)
                 }
             }
         }
@@ -144,30 +143,6 @@ class FormFragment : Fragment() {
         /*final TextView coordinatesView = (TextView)findViewById(R.id.coordinator);
         coordinatesView.setText(koord);*/
 
-        edit_title = view.findViewById(R.id.edit_title)
-        edit_description = view.findViewById(R.id.edit_description)
-        show_address = view.findViewById(R.id.show_address)
-        showDate = view.findViewById(R.id.showDate)
-        showTime = view.findViewById(R.id.showTime)
-        imageView = view.findViewById(R.id.image_container)
-        spinner = view.findViewById(R.id.events_spinner)
-
-
-        load_image = view.findViewById(R.id.load_image)
-        upload = view.findViewById(R.id.upload)
-
-        show_address.text = address
-        // setInitialDateTime();
-
-
-        val adapter = ArrayAdapter.createFromResource(context!!,
-                R.array.events_values, android.R.layout.simple_spinner_item)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-
-        /*upload.setOnClickListener((View v) -> {
-            //uploadData();
-        });*/
         return view
     }
 
