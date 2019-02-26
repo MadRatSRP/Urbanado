@@ -6,7 +6,6 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
@@ -16,11 +15,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
 
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -31,19 +25,24 @@ import java.util.Locale
 import idd.urbanido.R
 
 import android.app.Activity.RESULT_OK
+import android.util.Log
+import com.google.android.material.snackbar.Snackbar
+import idd.urbanido.model.EventResponse
+import idd.urbanido.network.APIService
+import idd.urbanido.network.ApiUtils
 import kotlinx.android.synthetic.main.fragment_form.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FormFragment : Fragment() {
 
-    //internal var bitmapImage: Bitmap
-
-    //val bitmap:Bitmap
-
-    //private val dateAndTime = Calendar.getInstance()
-    //internal val newCalendar = Calendar.getInstance()
+    var apiService: APIService? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        apiService = ApiUtils.apiService
 
         show_address.text = address
 
@@ -51,21 +50,6 @@ class FormFragment : Fragment() {
                 R.array.events_values, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         events_spinner.adapter = adapter
-
-        load_image.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(activity!!,
-                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        2000)
-            } else {
-                startGallery()
-            }
-        }
-
-        upload.setOnClickListener{
-            //uploadData();
-        }
 
         showDate.setOnClickListener {
             val mcurrentDate = Calendar.getInstance()
@@ -104,6 +88,71 @@ class FormFragment : Fragment() {
                     hour, minute, true)
             mTimePicker.setTitle("Select Time")
             mTimePicker.show()
+        }
+
+        load_image.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(activity!!,
+                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                        2000)
+            } else {
+                startGallery()
+            }
+        }
+
+        upload.setOnClickListener{v->
+
+            apiService?.postEvent(edit_description.text.toString(),
+                                 edit_title.text.toString(),
+                                 show_address.text.toString(),
+                                 koord,
+                                 showDate.text.toString(),
+                                 events_spinner.toString(),
+                                 "picture")?.enqueue(object : Callback<EventResponse> {
+
+                override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
+
+                    Log.i("", "post submitted to API." + response.body())
+
+                    if (response.isSuccessful) {
+
+                        Log.i("", "post registration to API" + response.body().toString())
+                        //Log.i("", "post status to API" + response.body().status)
+                        //Log.i("", "post msg to API" + response.body()!!.messages)
+                        val snackbar = Snackbar.make(v, "Форма была успешно отправлена",
+                                       Snackbar.LENGTH_LONG).show()
+                    }
+                    else {val snackbar = Snackbar.make(v, "Произошла ошибка",
+                            Snackbar.LENGTH_SHORT).show()}
+                }
+
+                override fun onFailure(call: Call<EventResponse>, t: Throwable) {
+                    t.printStackTrace()
+                    /*val snackbar = Snackbar.make(v, "Произошла ошибка",
+                                   Snackbar.LENGTH_LONG).show()*/
+                }
+            })
+
+            /*mAPIService!!.registrationPost("SampleTest2@gamil.com", "123456").enqueue(object : Callback<Registration> {
+
+                override fun onResponse(call: Call<Registration>, response: Response<Registration>) {
+
+                    Log.i("", "post submitted to API." + response.body()!!)
+
+                    if (response.isSuccessful()) {
+
+                        Log.i("", "post registration to API" + response.body()!!.toString())
+                        Log.i("", "post status to API" + response.body()!!.status)
+                        Log.i("", "post msg to API" + response.body()!!.messages)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<Registration>, t: Throwable) {
+
+                }
+            })*/
         }
     }
 
