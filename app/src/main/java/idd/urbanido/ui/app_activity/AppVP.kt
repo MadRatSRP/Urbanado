@@ -7,7 +7,7 @@ interface AppVP {
     interface View {
         fun setUp()
         fun setMVP()
-        fun setFragment(fragment: Fragment)
+        //fun setFragment(fragment: Fragment)
     }
 
     interface Presenter {

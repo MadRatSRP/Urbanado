@@ -119,7 +119,7 @@ class FormFragment : Fragment() {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1000) {
                 val returnUri = data!!.data
-                val bitmap:Bitmap
+                var bitmap:Bitmap? = null
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(activity!!
                             .applicationContext.contentResolver, returnUri)

@@ -1,37 +1,28 @@
 package idd.urbanido.network
 
-import java.util.concurrent.TimeUnit
-
-import idd.urbanido.BuildConfig
+import android.content.Context
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class NetworkClient {
-
-    fun NetworkClient() {
-
-    }
-
+    //fun NetworkClient() {}
     companion object {
-
-
-        var retrofit: Retrofit? = null
+        private var retrofit: Retrofit? = null
         private val URL = "https://hacaton2018app.herokuapp.com/"
-
-        fun getRetrofit(): Retrofit {
+        fun getRetrofit(context: Context): Retrofit? {
             if (retrofit == null) {
-                val interceptor = HttpLoggingInterceptor()
-                interceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
                 val client = OkHttpClient.Builder()
-                        .writeTimeout(95, TimeUnit.SECONDS)
-                        .readTimeout(95, TimeUnit.SECONDS)
-                        .connectTimeout(95, TimeUnit.SECONDS)
-                        .addInterceptor(interceptor)
-                        .build()
+                                         .connectTimeout(10, TimeUnit.SECONDS)
+                                         .writeTimeout(10, TimeUnit.SECONDS)
+                                         .readTimeout(30, TimeUnit.SECONDS)
+                                         //Chuck
+                                         .addInterceptor(ChuckInterceptor(context))
+                                         .build()
 
                 retrofit = Retrofit.Builder()
                         .baseUrl(URL)

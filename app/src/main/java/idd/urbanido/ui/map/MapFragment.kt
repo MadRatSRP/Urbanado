@@ -29,20 +29,17 @@ import idd.urbanido.R
 import ui.form.FormFragment
 
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.navigation.Navigation
 
 class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
 
     private var map: SupportMapFragment? = null
     private var mapPresenter: MapPresenter? = null
 
-    private var fab: FloatingActionButton? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         setMVP()
-
-        fab!!.setOnClickListener { v: View -> mapPresenter!!.addFragment(FormFragment.newInstance()) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +47,6 @@ class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
 
         (activity as AppCompatActivity).supportActionBar!!.setTitle(R.string.map)
         val view = inflater.inflate(R.layout.fragment_map, container, false)
-        fab = view.findViewById(R.id.fab)
 
         map = childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment?
 
@@ -111,12 +107,6 @@ class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
         FormFragment.address = addressText
     }
 
-
-    override fun setFragment(fragment: Fragment) {
-        fragmentManager!!.beginTransaction()
-                .replace(R.id.main_container, fragment).commit()
-    }
-
     override fun setMVP() {
         mapPresenter = MapPresenter(this)
     }
@@ -147,23 +137,10 @@ class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
             convertLocationToAddress(point)
         }
 
-
-        /*map.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
-                @Override
-                public void onCameraMoveStarted(int reason) {
-                    if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
-                    }
-                }
-            });
-
-            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    Log.d(TAG, "onMarkerClick");
-                    //startMap();
-                    return true;
-                }
-            });*/
+        googleMap.setOnMarkerClickListener {
+            Navigation.findNavController(view!!).navigate(R.id.action_mapFragment_to_formFragment)
+            true
+        }
     }
 
     companion object {

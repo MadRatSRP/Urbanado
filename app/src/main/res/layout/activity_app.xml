@@ -22,9 +22,12 @@
             app:contentInsetStartWithNavigation="0dp">
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
-    <FrameLayout
-        android:id="@+id/main_container"
+    <fragment
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        android:id="@+id/activityFragmentContainer"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_marginTop="56dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="56dp" />
+        android:layout_height="match_parent" />
 </androidx.drawerlayout.widget.DrawerLayout>
