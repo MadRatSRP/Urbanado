@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
@@ -26,12 +25,12 @@ import java.util.ArrayList
 import java.util.Locale
 
 import idd.urbanido.R
-import ui.form.FormFragment
+import ui.form.FormView
 
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.navigation.Navigation
 
-class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
+class MapView : Fragment(), MapVP.View, OnMapReadyCallback {
 
     private var map: SupportMapFragment? = null
     private var mapPresenter: MapPresenter? = null
@@ -104,7 +103,7 @@ class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
             addressText = TextUtils.join(System.getProperty("line.separator")!!,
                     addressFragments)
         }
-        FormFragment.address = addressText
+        FormView.address = addressText
     }
 
     override fun setMVP() {
@@ -133,7 +132,7 @@ class MapFragment : Fragment(), MapVP.View, OnMapReadyCallback {
             googleMap.clear()
             googleMap.addMarker(MarkerOptions().position(point))
 
-            FormFragment.koord = point.latitude.toString() + ";" + point.longitude
+            FormView.koord = point.latitude.toString() + ";" + point.longitude
             convertLocationToAddress(point)
         }
 

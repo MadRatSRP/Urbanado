@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="ui.map.MapFragment"
+        android:name="ui.map.MapView"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/formFragment"
-        android:name="ui.form.FormFragment"
+        android:name="ui.form.FormView"
         android:label="fragment_form"
         tools:layout="@layout/fragment_form" />
 </navigation>

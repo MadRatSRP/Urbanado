@@ -35,7 +35,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FormFragment : Fragment() {
+class FormView : Fragment() {
 
     var apiService: APIService? = null
 
@@ -75,7 +75,7 @@ class FormFragment : Fragment() {
             mDatePicker.show()
         }
 
-        showTime.setOnClickListener {
+        showTime.setOnClickListener {v->
             val mcurrentTime = Calendar.getInstance()
             val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
             val minute = mcurrentTime.get(Calendar.MINUTE)
@@ -83,7 +83,9 @@ class FormFragment : Fragment() {
             mTimePicker = TimePickerDialog(context,
                     { _, selectedHour, selectedMinute ->
 
-                        showTime.text = selectedHour.toString() + ":" + selectedMinute
+                        showTime.text = v.context.getString(R.string.showTime,
+                                                            selectedHour,
+                                                            selectedMinute)
                     },
                     hour, minute, true)
             mTimePicker.setTitle("Select Time")
@@ -118,13 +120,11 @@ class FormFragment : Fragment() {
                     if (response.isSuccessful) {
 
                         Log.i("", "post registration to API" + response.body().toString())
-                        //Log.i("", "post status to API" + response.body().status)
-                        //Log.i("", "post msg to API" + response.body()!!.messages)
-                        val snackbar = Snackbar.make(v, "Форма была успешно отправлена",
-                                       Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(v, "Форма была успешно отправлена", Snackbar.LENGTH_LONG)
+                                .show()
                     }
-                    else {val snackbar = Snackbar.make(v, "Произошла ошибка",
-                            Snackbar.LENGTH_SHORT).show()}
+                    else Snackbar.make(v, "Произошла ошибка", Snackbar.LENGTH_SHORT)
+                                 .show()
                 }
 
                 override fun onFailure(call: Call<EventResponse>, t: Throwable) {
@@ -200,9 +200,9 @@ class FormFragment : Fragment() {
         var koord: String? = null
         var address: String? = null
 
-        fun newInstance(): FormFragment {
+        fun newInstance(): FormView {
             val args = Bundle()
-            val fragment = FormFragment()
+            val fragment = FormView()
             fragment.arguments = args
             return fragment
         }

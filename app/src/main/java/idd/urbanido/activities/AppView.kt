@@ -1,14 +1,12 @@
 package ui.app_activity
 
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import idd.urbanido.R
 import kotlinx.android.synthetic.main.activity_app.*
-import ui.map.MapFragment
 
-class AppActivity : AppCompatActivity(), AppVP.View {
+class AppView : AppCompatActivity(), AppVP.View {
 
 
     private var appPresenter: AppPresenter? = null
@@ -29,7 +27,7 @@ class AppActivity : AppCompatActivity(), AppVP.View {
         setMVP()
         setSupportActionBar(toolbar)
         //getSupportActionBar().setTitle("AppMain");
-        //appPresenter!!.addFragment(MapFragment())
+        //appPresenter!!.addFragment(MapView())
     }
 
     override fun setMVP() {
