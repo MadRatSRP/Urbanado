@@ -1,4 +1,4 @@
-package ui.map
+package idd.urbanido.fragments
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -29,6 +29,8 @@ import ui.form.FormView
 
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.navigation.Navigation
+import ui.map.MapPresenter
+import ui.map.MapVP
 
 class MapView : Fragment(), MapVP.View, OnMapReadyCallback {
 
@@ -84,7 +86,7 @@ class MapView : Fragment(), MapVP.View, OnMapReadyCallback {
         }
 
         // No address was found
-        if (addresses == null || addresses.size == 0) {
+        if (addresses == null || addresses.isEmpty()) {
             if (errorMessage.isEmpty()) {
                 errorMessage = getString(R.string.no_address_found)
                 Log.e(TAG, errorMessage)
@@ -112,39 +114,39 @@ class MapView : Fragment(), MapVP.View, OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         val bryansk = LatLng(53.280458, 34.2275525)
-        googleMap!!.addMarker(MarkerOptions().position(bryansk)
-                .title("Marker in Bryansk"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(bryansk))
+        googleMap?.addMarker(MarkerOptions().position(bryansk)
+                  .title("Marker in Bryansk"))
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(bryansk))
         //mMap.animateCamera(CameraUpdate);
 
-        if (googleMap != null) {
-            if (checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            /*|| checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)*/ {
-
-                googleMap.isMyLocationEnabled = true
-            }
+        if (googleMap != null && context?.let {
+                                 checkSelfPermission(it,
+                                 Manifest.permission.ACCESS_FINE_LOCATION)
+                                 } == PackageManager.PERMISSION_GRANTED) {
+            /*|| checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                                        PackageManager.PERMISSION_GRANTED)*/
+            googleMap.isMyLocationEnabled = true
         }
 
-        googleMap.setMinZoomPreference(14f)
+        googleMap?.setMinZoomPreference(14f)
 
 
-        googleMap.setOnMapClickListener { point: LatLng ->
+        googleMap?.setOnMapClickListener { point: LatLng ->
             googleMap.clear()
             googleMap.addMarker(MarkerOptions().position(point))
 
-            FormView.koord = point.latitude.toString() + ";" + point.longitude
+            FormView.koord = context?.getString(R.string.textCoordinates,
+                                                point.latitude,
+                                                point.longitude)
+
             convertLocationToAddress(point)
         }
 
-        googleMap.setOnMarkerClickListener {
+        googleMap?.setOnMarkerClickListener {
             Navigation.findNavController(view!!).navigate(R.id.action_mapFragment_to_formFragment)
             true
         }
     }
 
-    companion object {
-
-        var coordinates: String? = null
-        private val TAG = "MapActivity"
-    }
+    companion object { private const val TAG = "MapActivity" }
 }

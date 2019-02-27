@@ -133,26 +133,6 @@ class FormView : Fragment() {
                                    Snackbar.LENGTH_LONG).show()*/
                 }
             })
-
-            /*mAPIService!!.registrationPost("SampleTest2@gamil.com", "123456").enqueue(object : Callback<Registration> {
-
-                override fun onResponse(call: Call<Registration>, response: Response<Registration>) {
-
-                    Log.i("", "post submitted to API." + response.body()!!)
-
-                    if (response.isSuccessful()) {
-
-                        Log.i("", "post registration to API" + response.body()!!.toString())
-                        Log.i("", "post status to API" + response.body()!!.status)
-                        Log.i("", "post msg to API" + response.body()!!.messages)
-
-                    }
-                }
-
-                override fun onFailure(call: Call<Registration>, t: Throwable) {
-
-                }
-            })*/
         }
     }
 
@@ -199,12 +179,5 @@ class FormView : Fragment() {
 
         var koord: String? = null
         var address: String? = null
-
-        fun newInstance(): FormView {
-            val args = Bundle()
-            val fragment = FormView()
-            fragment.arguments = args
-            return fragment
-        }
     }
 }
