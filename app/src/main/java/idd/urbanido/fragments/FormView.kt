@@ -25,8 +25,6 @@ import java.util.Locale
 import idd.urbanido.R
 
 import android.app.Activity.RESULT_OK
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.model.EventResponse
 import idd.urbanido.network.APIService
 import idd.urbanido.network.ApiUtils
@@ -34,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_form.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ui.util.snack
 
 class FormView : Fragment() {
 
@@ -103,36 +102,32 @@ class FormView : Fragment() {
             }
         }
 
-        upload.setOnClickListener{v->
+        upload.setOnClickListener{
 
-            apiService?.postEvent(edit_description.text.toString(),
-                                 edit_title.text.toString(),
-                                 show_address.text.toString(),
-                                 koord,
-                                 showDate.text.toString(),
-                                 events_spinner.toString(),
-                                 "picture")?.enqueue(object : Callback<EventResponse> {
+            var event = EventResponse(edit_title.text.toString(),
+                                      edit_description.text.toString(),
+                                      address, koord)
 
+            apiService?.getpost(event)?.enqueue(object : Callback<EventResponse> {
                 override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
-
-                    Log.i("", "post submitted to API." + response.body())
-
+                    //logd("post submitted to API." + response.body())
                     if (response.isSuccessful) {
 
-                        Log.i("", "post registration to API" + response.body().toString())
-                        Snackbar.make(v, "Форма была успешно отправлена", Snackbar.LENGTH_LONG)
-                                .show()
+                        //logd("post registration to API" + response.body().toString())
+                        snack("Форма была успешно отправлена")
                     }
-                    else Snackbar.make(v, "Произошла ошибка", Snackbar.LENGTH_SHORT)
-                                 .show()
+                    else snack("Произошла ошибка")
                 }
 
                 override fun onFailure(call: Call<EventResponse>, t: Throwable) {
                     t.printStackTrace()
-                    /*val snackbar = Snackbar.make(v, "Произошла ошибка",
-                                   Snackbar.LENGTH_LONG).show()*/
+                    snack("Произошла ошибка")
                 }
             })
+            //var apiInterface = APIClient.client?.create(APIInterface::class.java)
+
+            /*loginRetrofit2Api(apiInterface, edit_title.text.toString(),
+                              edit_description.text.toString())*/
         }
     }
 
@@ -167,12 +162,11 @@ class FormView : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         (activity as AppCompatActivity).supportActionBar!!.setTitle(R.string.form)
-        val view = inflater.inflate(R.layout.fragment_form, container, false)
 
         /*final TextView coordinatesView = (TextView)findViewById(R.id.coordinator);
         coordinatesView.setText(koord);*/
 
-        return view
+        return inflater.inflate(R.layout.fragment_form, container, false)
     }
 
     companion object {

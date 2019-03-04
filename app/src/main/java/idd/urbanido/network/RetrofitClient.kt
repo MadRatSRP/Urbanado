@@ -23,6 +23,7 @@ object RetrofitClient {
                     //.addInterceptor(ChuckInterceptor(context))
                     .connectTimeout(100, TimeUnit.SECONDS)
                     .readTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
                     .build()
 
             retrofit = Retrofit.Builder()

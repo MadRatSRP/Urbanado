@@ -143,7 +143,7 @@ class MapView : Fragment(), MapVP.View, OnMapReadyCallback {
         }
 
         googleMap?.setOnMarkerClickListener {
-            Navigation.findNavController(view!!).navigate(R.id.action_mapFragment_to_formFragment)
+            //Navigation.findNavController(view!!).navigate(R.id.action_mapFragment_to_formFragment)
             true
         }
     }
