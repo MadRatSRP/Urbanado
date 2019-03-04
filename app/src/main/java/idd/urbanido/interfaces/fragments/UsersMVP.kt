@@ -13,15 +13,19 @@ interface UsersMVP {
         fun showSnack(text: String)
 
         fun showUsers(users: List<RegisteredUsers>)
+
+        fun showUser(name: String, email: String, password: String, phone: String)
     }
 
     interface Presenter {
         fun updateUsers(users: List<RegisteredUsers>)
 
-        fun getData(context: Context)
+        fun getUsersList(context: Context)
     }
 
     interface Repository {
         fun getUsersObservable(context: Context): Observable<List<RegisteredUsers>>?
+
+        fun getUserObservable(context: Context): Observable<RegisteredUsers>?
     }
 }

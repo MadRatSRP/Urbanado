@@ -9,7 +9,6 @@ import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.R
 import idd.urbanido.adapters.UsersAdapter
 import idd.urbanido.interfaces.fragments.UsersMVP
-import idd.urbanido.model.Users
 import idd.urbanido.model.registered_user.RegisteredUsers
 import idd.urbanido.presenters.fragments.UsersPresenter
 import idd.urbanido.repositories.UsersRepository
@@ -28,8 +27,12 @@ class UsersView: Fragment(), UsersMVP.View {
 
         usersUsersList.linearManager()
 
+        usersShowUserInformation.setOnClickListener {
+            context?.let { usersPresenter?.getUserInformation(it) }
+        }
+
         usersShowUsersList.setOnClickListener {
-            context?.let { usersPresenter?.getData(it) }
+            context?.let { usersPresenter?.getUsersList(it) }
         }
     }
 
@@ -54,6 +57,13 @@ class UsersView: Fragment(), UsersMVP.View {
     override fun showUsers(users: List<RegisteredUsers>) {
         usersAdapter?.updateUsersList(users)
         usersUsersList.adapter = usersAdapter
+    }
+
+    override fun showUser(name: String, email: String, password: String, phone: String) {
+        userNameValue.text = name
+        userEmailValue.text = email
+        userPasswordValue.text = password
+        userPhoneValue.text = phone
     }
 
     override fun onDestroyView() {

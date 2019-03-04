@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface NetworkInterface {
 
@@ -17,7 +18,9 @@ interface NetworkInterface {
     @POST("api/v1/users")
     fun postuser(@Body registration: RegistrationResponse): Call<RegistrationResponse>
 
-
     @GET("api/v1/users")
-    fun getuser(): Observable<List<RegisteredUsers>>
+    fun getusers(): Observable<List<RegisteredUsers>>
+
+    @GET("api/v1/users/{id}")
+    fun getuser(@Path("id") id: String): Observable<RegisteredUsers>
 }
