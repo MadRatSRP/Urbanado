@@ -20,6 +20,10 @@ interface UsersMVP {
     interface Presenter {
         fun updateUsers(users: List<RegisteredUsers>)
 
+        fun updateUser(name: String, email: String, password: String, phone: String)
+
+        fun getUserInformation(context: Context)
+
         fun getUsersList(context: Context)
     }
 

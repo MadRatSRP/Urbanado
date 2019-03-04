@@ -11,11 +11,11 @@ class UsersPresenter(private var sv: UsersMVP.View,
         sv.showUsers(users)
     }
 
-    fun updateUser(name: String, email: String, password: String, phone: String) {
+    override fun updateUser(name: String, email: String, password: String, phone: String) {
         sv.showUser(name, email, password, phone)
     }
 
-    fun getUserInformation(context: Context) {
+    override fun getUserInformation(context: Context) {
         sr.getUserObservable(context)?.subscribe ({ response->
             updateUser(response.name, response.email, response.password, response.phone)
             //logd("Запрос успешно получен")
