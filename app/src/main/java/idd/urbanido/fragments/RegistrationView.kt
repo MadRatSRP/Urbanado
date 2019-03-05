@@ -28,7 +28,6 @@ class RegistrationView : Fragment() {
 
         registrationShowUsersList.setOnClickListener { v->
             Navigation.findNavController(v).navigate(R.id.action_registrationView_to_usersView)
-
         }
 
         registrationRegisterUser.setOnClickListener {
