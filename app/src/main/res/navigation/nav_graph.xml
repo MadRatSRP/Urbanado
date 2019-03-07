@@ -7,7 +7,8 @@
     <fragment
         android:id="@+id/registration"
         android:name="idd.urbanido.fragments.Registration"
-        android:label="Registration">
+        android:label="@string/titleRegistration"
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registration_to_users"
             app:destination="@id/users" />
@@ -16,4 +17,14 @@
         android:id="@+id/users"
         android:name="idd.urbanido.fragments.UsersView"
         android:label="Users" />
+    <fragment
+        android:id="@+id/authorization"
+        android:name="idd.urbanido.fragments.Authorization"
+        android:label="@string/titleAuthorization"
+        tools:layout="@layout/fragment_authorization" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="idd.urbanido.fragments.Profile"
+        android:label="@string/titleProfile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

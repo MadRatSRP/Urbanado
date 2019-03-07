@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
-
         <item android:id="@+id/registration"
-            android:title="Registration" />
+            android:title="@string/titleRegistration" />
 
-        <item android:id="@+id/users"
-            android:title="Users" />
+        <item android:id="@+id/authorization"
+            android:title="@string/titleAuthorization" />
 
+        <item android:id="@+id/profile"
+            android:title="@string/titleProfile" />
     </group>
-
 </menu>
