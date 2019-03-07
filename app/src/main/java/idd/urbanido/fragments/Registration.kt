@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import idd.urbanido.R
 import idd.urbanido.model.registration.RegistrationResponse
-import idd.urbanido.model.Users
 import idd.urbanido.network.APIService
 import idd.urbanido.network.ApiUtils
 import kotlinx.android.synthetic.main.fragment_registration.*
@@ -17,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ui.util.snack
 
-class RegistrationView : Fragment() {
+class Registration : Fragment() {
 
     var apiService: APIService? = null
 
@@ -27,20 +26,24 @@ class RegistrationView : Fragment() {
         apiService = ApiUtils.apiService
 
         registrationShowUsersList.setOnClickListener { v->
-            Navigation.findNavController(v).navigate(R.id.action_registrationView_to_usersView)
+            Navigation.findNavController(v).navigate(R.id.action_registration_to_users)
         }
 
         registrationRegisterUser.setOnClickListener {
 
-            var register = Users(registrationName.text.toString(),
+            /*var register = Users(registrationName.text.toString(),
                     registrationEmail.text.toString(),
                     registrationPassword.text.toString(),
                     registrationPasswordConfirm.text.toString(),
-                    registrationPhone.text.toString())
+                    registrationPhone.text.toString())*/
 
-            var registrationResponse = RegistrationResponse(register)
+            //var registrationResponse = RegistrationResponse(register)
 
-            apiService?.postuser(registrationResponse)?.enqueue(object: Callback<RegistrationResponse>{
+            apiService?.registerUser(RegistrationResponse(RegistrationResponse.User(registrationName.text.toString(),
+                    registrationEmail.text.toString(),
+                    registrationPassword.text.toString(),
+                    registrationPasswordConfirm.text.toString(),
+                    registrationPhone.text.toString())))?.enqueue(object: Callback<RegistrationResponse>{
                 override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
                     //logd("post submitted to API." + response.body())
                     if (response.isSuccessful) {

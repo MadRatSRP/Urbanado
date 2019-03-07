@@ -1,6 +1,5 @@
 package idd.urbanido.network
 
-import idd.urbanido.model.EventResponse
 import idd.urbanido.model.registration.RegistrationResponse
 import idd.urbanido.model.users.UsersResponse
 import io.reactivex.Observable
@@ -11,11 +10,8 @@ import retrofit2.http.POST
 
 interface APIService {
 
-    @POST("events")
-    fun getpost(@Body event:EventResponse): Call<EventResponse>
-
     @POST("api/v1/users")
-    fun postuser(@Body registration:RegistrationResponse): Call<RegistrationResponse>
+    fun registerUser(@Body registrationResponse: RegistrationResponse): Call<RegistrationResponse>
 
 
     @GET("api/v1/users")
