@@ -1,7 +1,5 @@
 package ui.app_activity
 
-import androidx.fragment.app.Fragment
-
-class AppPresenter(private val av: AppVP.View) : AppVP.Presenter {
+class AppPresenter(private val av: AppMVP.View) : AppMVP.Presenter {
 
 }

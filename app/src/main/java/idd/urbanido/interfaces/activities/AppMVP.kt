@@ -1,12 +1,13 @@
-package ui.map
+package ui.app_activity
 
 import androidx.fragment.app.Fragment
 
-interface MapVP {
+interface AppMVP {
 
     interface View {
         fun setMVP()
     }
 
-    interface Presenter {}
+    interface Presenter {
+    }
 }

@@ -12,7 +12,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import idd.urbanido.R
 
-class AppView : AppCompatActivity(), AppVP.View {
+class AppView : AppCompatActivity(), AppMVP.View {
 
     private lateinit var drawerLayout: DrawerLayout
     private var appPresenter: AppPresenter? = null
