@@ -1,7 +1,6 @@
 package idd.urbanido.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import idd.urbanido.interfaces.fragments.ProfileMVP
 import idd.urbanido.presenters.fragments.ProfilePresenter
 import idd.urbanido.repositories.ProfileRepository
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.view.*
+import ui.util.logd
 
 class Profile : Fragment(), ProfileMVP.View {
 
@@ -22,11 +21,17 @@ class Profile : Fragment(), ProfileMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        context?.let { profilePresenter?.getData(it) }
+        var string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTIxNTQwNDMsInN1YiI6MjF9.W3QfDbwMDIr9ULgEMLfj_CbmtIYH9MJwnMgYZvit9pg"
 
-        updateProfileData.setOnClickListener {
+        //var authorization = Authorization()
 
-        }
+        //authorization.token?.let { logd(it) }
+
+        context?.let { string?.let { it1 -> profilePresenter?.getData(it, it1) } }
+
+        /*updateProfileData.setOnClickListener {
+
+        }*/
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -42,13 +42,9 @@ class Quotes: Fragment(), QuotesMVP.View {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quotes, container, false)
 
-        val bundle = arguments?.getBundle("authBundle")
+        val myArguments = arguments?.let { QuotesArgs.fromBundle(it).token }
 
-        var string: String? = bundle?.getString("token")
-
-        string?.let { logd(it) }
-
-        view.token.text = string
+        view.token.text = myArguments
 
         context?.let { quotesAdapter = QuotesAdapter(it) }
 

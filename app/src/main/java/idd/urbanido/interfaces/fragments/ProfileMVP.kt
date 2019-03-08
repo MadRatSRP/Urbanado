@@ -12,10 +12,10 @@ interface ProfileMVP {
 
     interface Presenter {
         fun updateProfile(name: String, email: String, password: String, phone: String)
-        fun getData(context: Context)
+        fun getData(context: Context, token: String)
     }
 
     interface Repository {
-        fun getProfileObservable(context: Context): Observable<ProfileResponse>?
+        fun getProfileObservable(context: Context, token: String): Observable<ProfileResponse>?
     }
 }

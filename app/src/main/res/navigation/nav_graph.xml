@@ -31,12 +31,13 @@
         android:name="idd.urbanido.fragments.Quotes"
         android:label="@string/titleQuotes"
         tools:layout="@layout/fragment_quotes" >
-        <argument
-            android:name="token"
-            app:argType="string" />
         <action
             android:id="@+id/action_quotes_to_profileQuote"
             app:destination="@id/profileQuote" />
+        <argument
+            android:name="token"
+            app:argType="string"
+            android:defaultValue="kappa" />
     </fragment>
     <fragment
         android:id="@+id/profileQuote"

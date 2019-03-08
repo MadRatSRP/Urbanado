@@ -9,8 +9,8 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
         pv.showProfile(name, email, password, phone)
     }
 
-    override fun getData(context: Context) {
-        pr.getProfileObservable(context)?.subscribe ({ response->
+    override fun getData(context: Context, token: String) {
+        pr.getProfileObservable(context, token)?.subscribe ({ response->
             updateProfile(response.name, response.email,
                        response.password, response.phone)
             //logd("Запрос успешно получен")
