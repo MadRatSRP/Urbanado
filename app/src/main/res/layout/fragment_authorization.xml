@@ -9,7 +9,7 @@
     android:layout_marginEnd="20dp"
     android:layout_marginTop="56dp">
     <EditText
-        android:id="@+id/login"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,20 +23,22 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login"/>
+        app:layout_constraintTop_toBottomOf="@id/email"/>
 
     <Button
         android:id="@+id/authorizeUser"
         android:text="Авторизовать пользователя"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/moveToProfile"/>
+        app:layout_constraintBottom_toTopOf="@id/registerYourself"/>
 
     <Button
-        android:id="@+id/moveToProfile"
-        android:text="Перейти к профилю"
+        android:id="@+id/registerYourself"
+        android:text="Перейти к регистрации"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

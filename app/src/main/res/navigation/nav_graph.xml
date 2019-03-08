@@ -3,28 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registration">
+    app:startDestination="@id/authorization">
     <fragment
         android:id="@+id/registration"
         android:name="idd.urbanido.fragments.Registration"
         android:label="@string/titleRegistration"
-        tools:layout="@layout/fragment_registration">
-        <action
-            android:id="@+id/action_registration_to_users"
-            app:destination="@id/users" />
-    </fragment>
-    <fragment
-        android:id="@+id/users"
-        android:name="idd.urbanido.fragments.UsersView"
-        android:label="Users" />
+        tools:layout="@layout/fragment_registration"/>
     <fragment
         android:id="@+id/authorization"
         android:name="idd.urbanido.fragments.Authorization"
         android:label="@string/titleAuthorization"
         tools:layout="@layout/fragment_authorization" >
         <action
-            android:id="@+id/action_authorization_to_profile"
-            app:destination="@id/profile" />
+            android:id="@+id/action_authorization_to_quotes"
+            app:destination="@id/quotes" />
+        <action
+            android:id="@+id/action_authorization_to_registration"
+            app:destination="@id/registration" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -35,7 +30,14 @@
         android:id="@+id/quotes"
         android:name="idd.urbanido.fragments.Quotes"
         android:label="@string/titleQuotes"
-        tools:layout="@layout/fragment_quotes" />
+        tools:layout="@layout/fragment_quotes" >
+        <argument
+            android:name="token"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_quotes_to_profileQuote"
+            app:destination="@id/profileQuote" />
+    </fragment>
     <fragment
         android:id="@+id/profileQuote"
         android:name="idd.urbanido.fragments.ProfileQuote"

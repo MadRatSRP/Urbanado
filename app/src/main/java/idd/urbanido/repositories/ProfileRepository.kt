@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 class ProfileRepository: ProfileMVP.Repository {
     override fun getProfileObservable(context: Context): Observable<ProfileResponse>? {
         return NetworkClient.getRetrofit(context)?.create<NetworkInterface>(NetworkInterface::class.java)
-                ?.getProfile("1")
+                ?.getProfile("1", "2")
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
     }

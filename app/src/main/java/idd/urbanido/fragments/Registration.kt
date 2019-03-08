@@ -20,17 +20,12 @@ class Registration : Fragment(), RegistrationMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        registrationShowUsersList.setOnClickListener { v->
-
-
-            Navigation.findNavController(v).navigate(R.id.action_registration_to_users)
-        }
-
         registrationRegisterUser.setOnClickListener {
             context?.let {
                 registrationPresenter?.registerUser(it, registrationEmail, registrationName,
                         registrationPassword, registrationPasswordConfirm,
                         registrationPhone)
+
             }
         }
     }

@@ -8,6 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 class NetworkClient {
@@ -22,12 +23,9 @@ class NetworkClient {
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
 
                 val client = OkHttpClient.Builder()
-                        /*.writeTimeout(95, TimeUnit.SECONDS)
-                    .readTimeout(95, TimeUnit.SECONDS)
-                    .connectTimeout(95, TimeUnit.SECONDS)*/
-                        .connectTimeout(10, TimeUnit.SECONDS)
-                        .writeTimeout(10, TimeUnit.SECONDS)
-                        .readTimeout(30, TimeUnit.SECONDS)
+                        .connectTimeout(100, TimeUnit.SECONDS)
+                        .writeTimeout(100, TimeUnit.SECONDS)
+                        .readTimeout(100, TimeUnit.SECONDS)
 
                         //LoggingInterceptor
                         .addInterceptor(interceptor)
@@ -38,6 +36,7 @@ class NetworkClient {
 
                 retrofit = Retrofit.Builder()
                         .baseUrl(URL)
+                        .addConverterFactory(ScalarsConverterFactory.create())
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .client(client)

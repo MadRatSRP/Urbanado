@@ -1,6 +1,7 @@
 package idd.urbanido.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,15 +23,18 @@ class Profile : Fragment(), ProfileMVP.View {
         setupMVP()
 
         context?.let { profilePresenter?.getData(it) }
+
+        updateProfileData.setOnClickListener {
+
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        val bundle = Bundle()
-
-        view.answer.text = bundle.getString("answer")
+        //bundle.putString("token", token)
+        //bundle.putBundle("authBundle", bundle)
 
         return view
     }

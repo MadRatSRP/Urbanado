@@ -14,6 +14,7 @@ import idd.urbanido.repositories.QuotesRepository
 import kotlinx.android.synthetic.main.fragment_quotes.*
 import kotlinx.android.synthetic.main.fragment_quotes.view.*
 import ui.util.linearManager
+import ui.util.logd
 
 class Quotes: Fragment(), QuotesMVP.View {
     private var quotesAdapter: QuotesAdapter? = null
@@ -40,6 +41,14 @@ class Quotes: Fragment(), QuotesMVP.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quotes, container, false)
+
+        val bundle = arguments?.getBundle("authBundle")
+
+        var string: String? = bundle?.getString("token")
+
+        string?.let { logd(it) }
+
+        view.token.text = string
 
         context?.let { quotesAdapter = QuotesAdapter(it) }
 

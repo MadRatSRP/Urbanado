@@ -38,6 +38,9 @@ dependencies {
     //ConstraintLayout
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
+    //Java Scalars Converter
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'

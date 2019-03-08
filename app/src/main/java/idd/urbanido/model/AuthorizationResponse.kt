@@ -1,10 +1,10 @@
 package idd.urbanido.model
 
 data class AuthorizationResponse(
-        val user: User
+        val auth: Auth
 ) {
-    data class User(
-            val name: String,
+    data class Auth(
+            val email: String,
             val password: String
     )
 }
