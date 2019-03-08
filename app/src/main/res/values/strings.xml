@@ -5,4 +5,5 @@
     <string name="titleRegistration">Registration</string>
     <string name="titleAuthorization">Authorization</string>
     <string name="titleProfile">Profile</string>
+    <string name="titleQuotes">Quotes</string>
 </resources>

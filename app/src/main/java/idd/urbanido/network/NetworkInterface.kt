@@ -1,8 +1,9 @@
 package idd.urbanido.network
 
-import idd.urbanido.model.authorization.AuthorizationResponse
-import idd.urbanido.model.registration.RegistrationResponse
-import idd.urbanido.model.registered_user.RegisteredUsers
+import idd.urbanido.model.AuthorizationResponse
+import idd.urbanido.model.RegistrationResponse
+import idd.urbanido.model.ProfileResponse
+import idd.urbanido.model.QuotesResponse
 import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.Body
@@ -18,11 +19,13 @@ interface NetworkInterface {
 
     @POST("api/v1/users")
     fun authorizeUser(@Body authorizationResponse: AuthorizationResponse)
-            : Call<AuthorizationResponse>
-
-    @GET("api/v1/users")
-    fun getusers(): Observable<List<RegisteredUsers>>
+            : Call<String>
 
     @GET("api/v1/users/{id}")
-    fun getuser(@Path("id") id: String): Observable<RegisteredUsers>
+    fun getProfile(@Path("id") id: String): Observable<ProfileResponse>
+
+    @GET("api/v1/users")
+    fun getQuotesList(): Observable<List<QuotesResponse>>
+
+
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import idd.urbanido.R
 import idd.urbanido.interfaces.fragments.AuthorizationMVP
 import idd.urbanido.presenters.fragments.AuthorizationPresenter
@@ -19,8 +20,16 @@ class Authorization: Fragment(), AuthorizationMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
+
         authorizeUser.setOnClickListener {
             context?.let { authorizationPresenter?.authorizeUser(it, login, password) }
+        }
+
+        //val bundle = Bundle()
+        //bundle.putString("answer", answer)
+
+        moveToProfile.setOnClickListener {view->
+            Navigation.findNavController(view).navigate(R.id.action_authorization_to_profile/*, bundle*/)
         }
     }
 

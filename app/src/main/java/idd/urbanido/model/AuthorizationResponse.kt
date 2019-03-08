@@ -1,4 +1,4 @@
-package idd.urbanido.model.authorization
+package idd.urbanido.model
 
 data class AuthorizationResponse(
         val user: User

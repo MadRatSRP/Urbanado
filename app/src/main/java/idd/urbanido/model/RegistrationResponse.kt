@@ -1,4 +1,4 @@
-package idd.urbanido.model.registration
+package idd.urbanido.model
 
 data class RegistrationResponse(
         val user: User

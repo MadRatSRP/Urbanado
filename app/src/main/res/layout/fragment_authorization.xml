@@ -27,6 +27,16 @@
 
     <Button
         android:id="@+id/authorizeUser"
+        android:text="Авторизовать пользователя"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/moveToProfile"/>
+
+    <Button
+        android:id="@+id/moveToProfile"
+        android:text="Перейти к профилю"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

@@ -21,6 +21,8 @@ class Registration : Fragment(), RegistrationMVP.View {
         setupMVP()
 
         registrationShowUsersList.setOnClickListener { v->
+
+
             Navigation.findNavController(v).navigate(R.id.action_registration_to_users)
         }
 

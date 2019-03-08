@@ -3,7 +3,7 @@ package idd.urbanido.presenters.fragments
 import android.content.Context
 import android.widget.EditText
 import idd.urbanido.interfaces.fragments.RegistrationMVP
-import idd.urbanido.model.registration.RegistrationResponse
+import idd.urbanido.model.RegistrationResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

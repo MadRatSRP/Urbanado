@@ -21,10 +21,28 @@
         android:id="@+id/authorization"
         android:name="idd.urbanido.fragments.Authorization"
         android:label="@string/titleAuthorization"
-        tools:layout="@layout/fragment_authorization" />
+        tools:layout="@layout/fragment_authorization" >
+        <action
+            android:id="@+id/action_authorization_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="idd.urbanido.fragments.Profile"
         android:label="@string/titleProfile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/quotes"
+        android:name="idd.urbanido.fragments.Quotes"
+        android:label="@string/titleQuotes"
+        tools:layout="@layout/fragment_quotes" />
+    <fragment
+        android:id="@+id/profileQuote"
+        android:name="idd.urbanido.fragments.ProfileQuote"
+        android:label="fragment_profile_quote"
+        tools:layout="@layout/fragment_profile_quote" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

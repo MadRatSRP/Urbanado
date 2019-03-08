@@ -2,7 +2,7 @@ package idd.urbanido.interfaces.fragments
 
 import android.content.Context
 import android.widget.EditText
-import idd.urbanido.model.registration.RegistrationResponse
+import idd.urbanido.model.RegistrationResponse
 import retrofit2.Call
 
 interface RegistrationMVP {

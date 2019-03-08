@@ -7,12 +7,42 @@ import android.view.View
 import android.view.ViewGroup
 
 import idd.urbanido.R
+import idd.urbanido.interfaces.fragments.ProfileMVP
+import idd.urbanido.presenters.fragments.ProfilePresenter
+import idd.urbanido.repositories.ProfileRepository
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
-class Profile : Fragment() {
+class Profile : Fragment(), ProfileMVP.View {
+
+    private var profilePresenter: ProfilePresenter? = null
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupMVP()
+
+        context?.let { profilePresenter?.getData(it) }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        var view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        val bundle = Bundle()
+
+        view.answer.text = bundle.getString("answer")
+
+        return view
+    }
+
+    override fun setupMVP() {
+        profilePresenter = ProfilePresenter(this, ProfileRepository())
+    }
+
+    override fun showProfile(name: String, email: String, password: String, phone: String) {
+        userNameValue.text = name
+        userEmailValue.text = email
+        userPasswordValue.text = password
+        userPhoneValue.text = phone
     }
 }

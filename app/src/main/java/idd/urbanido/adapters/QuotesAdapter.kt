@@ -1,22 +1,26 @@
 package idd.urbanido.adapters
 
 import android.content.Context
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import idd.urbanido.R
-import idd.urbanido.model.Users
-import idd.urbanido.model.registered_user.RegisteredUsers
+import idd.urbanido.fragments.ProfileQuote
+import idd.urbanido.model.ProfileResponse
+import idd.urbanido.model.QuotesResponse
 
-class UsersAdapter(private val context: Context): RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
+class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAdapter.UsersHolder>() {
 
-    private val users = ArrayList<RegisteredUsers>()
+    private val quotes = ArrayList<QuotesResponse>()
 
-    fun updateUsersList(new_users: List<RegisteredUsers>) {
-        users.clear()
-        users.addAll(new_users)
+    fun updateQuotesList(new_quotes: List<QuotesResponse>) {
+        quotes.clear()
+        quotes.addAll(new_quotes)
         this.notifyDataSetChanged()
     }
 
@@ -27,14 +31,22 @@ class UsersAdapter(private val context: Context): RecyclerView.Adapter<UsersAdap
     }
 
     override fun onBindViewHolder(holder: UsersHolder, position: Int) {
-        holder.name.text = users[position].name
-        holder.email.text = users[position].email
-        holder.password.text = users[position].password
-        holder.phone.text = users[position].phone
+        holder.name.text = quotes[position].name
+
+        holder.name.setOnClickListener {v->
+            var bundle = Bundle()
+            bundle.putString("title", holder.name.text.toString())
+
+            Navigation.findNavController(v).navigate(R.id.profileQuote, bundle)
+        }
+
+        holder.email.text = quotes[position].email
+        holder.password.text = quotes[position].password
+        holder.phone.text = quotes[position].phone
     }
 
     override fun getItemCount(): Int {
-        return users.size
+        return quotes.size
     }
 
     inner class UsersHolder internal constructor(view: View):

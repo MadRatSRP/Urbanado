@@ -1,9 +1,9 @@
-package idd.urbanido.model.registered_user
+package idd.urbanido.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class RegisteredUsers(@field:SerializedName("name")
+data class ProfileResponse(@field:SerializedName("name")
                           @field:Expose
                           val name: String,
 

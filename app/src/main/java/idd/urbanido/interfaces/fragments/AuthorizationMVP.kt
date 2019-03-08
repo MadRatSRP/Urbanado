@@ -2,7 +2,7 @@ package idd.urbanido.interfaces.fragments
 
 import android.content.Context
 import android.widget.EditText
-import idd.urbanido.model.authorization.AuthorizationResponse
+import idd.urbanido.model.AuthorizationResponse
 import retrofit2.Call
 
 interface AuthorizationMVP {
@@ -17,6 +17,6 @@ interface AuthorizationMVP {
 
     interface Repository {
         fun authorizeUserCall(context: Context, authorizationResponse: AuthorizationResponse)
-                : Call<AuthorizationResponse>?
+                : Call<String>?
     }
 }

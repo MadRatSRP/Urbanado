@@ -1,0 +1,28 @@
+          /*var register = Users(registrationName.text.toString(),
+                    registrationEmail.text.toString(),
+                    registrationPassword.text.toString(),
+                    registrationPasswordConfirm.text.toString(),
+                    registrationPhone.text.toString())*/
+
+            //var registrationResponse = RegistrationResponse(register)
+
+            /*apiService?.registerUser(RegistrationResponse(RegistrationResponse.User(registrationName.text.toString(),
+                    registrationEmail.text.toString(),
+                    registrationPassword.text.toString(),
+                    registrationPasswordConfirm.text.toString(),
+                    registrationPhone.text.toString())))?.enqueue(object: Callback<RegistrationResponse>{
+                override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
+                    //logd("post submitted to API." + response.body())
+                    if (response.isSuccessful) {
+
+                        //logd("post registration to API" + response.body().toString())
+                        snack("Форма была успешно отправлена")
+                    }
+                    else snack("Произошла ошибка")
+                }
+
+                override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                    t.printStackTrace()
+                    snack("Произошла ошибка")
+                }
+            })*/
