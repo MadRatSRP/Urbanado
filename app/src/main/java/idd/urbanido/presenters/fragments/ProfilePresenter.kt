@@ -3,7 +3,7 @@ package idd.urbanido.presenters.fragments
 import android.content.Context
 import android.widget.EditText
 import idd.urbanido.interfaces.fragments.ProfileMVP
-import idd.urbanido.model.Profile
+import idd.urbanido.model.profile.Profile
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,8 +17,8 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
 
     override fun setProfile(context: Context, token: String, name: EditText, email: EditText, phone: EditText) {
         sendProfile(context, token, Profile(name.text.toString(),
-                            email.text.toString(),
-                            phone.text.toString()))
+                                            email.text.toString(),
+                                            phone.text.toString()))
     }
 
     override fun getData(context: Context, token: String) {

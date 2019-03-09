@@ -64,6 +64,8 @@ class Profile : Fragment(), ProfileMVP.View {
             }
         }
 
+        token?.let { logd(it) }
+
         updateProfileData.setOnClickListener {
             context?.let { it1 ->
                 token?.let { it2 ->

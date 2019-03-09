@@ -2,8 +2,8 @@ package idd.urbanido.repositories
 
 import android.content.Context
 import idd.urbanido.interfaces.fragments.ProfileMVP
-import idd.urbanido.model.Profile
-import idd.urbanido.model.ProfileResponse
+import idd.urbanido.model.profile.Profile
+import idd.urbanido.model.profile.ProfileResponse
 import idd.urbanido.network.NetworkClient
 import idd.urbanido.network.NetworkInterface
 import io.reactivex.Observable

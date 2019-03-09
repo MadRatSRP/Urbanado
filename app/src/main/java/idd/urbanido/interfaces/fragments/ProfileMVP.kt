@@ -3,8 +3,8 @@ package idd.urbanido.interfaces.fragments
 import android.content.Context
 import android.widget.EditText
 import android.widget.ImageButton
-import idd.urbanido.model.Profile
-import idd.urbanido.model.ProfileResponse
+import idd.urbanido.model.profile.Profile
+import idd.urbanido.model.profile.ProfileResponse
 import io.reactivex.Observable
 import retrofit2.Call
 

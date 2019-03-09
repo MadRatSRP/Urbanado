@@ -1,4 +1,4 @@
-package idd.urbanido.model
+package idd.urbanido.model.profile
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
