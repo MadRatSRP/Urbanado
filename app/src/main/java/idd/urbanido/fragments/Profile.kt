@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.interfaces.fragments.ProfileMVP
 import idd.urbanido.presenters.fragments.ProfilePresenter
 import idd.urbanido.repositories.ProfileRepository
@@ -62,16 +64,19 @@ class Profile : Fragment(), ProfileMVP.View {
             }
         }
 
-        /*updateProfileData.setOnClickListener {}*/
+        updateProfileData.setOnClickListener {
+            context?.let { it1 ->
+                token?.let { it2 ->
+                    profilePresenter?.setProfile(it1, it2, userNameValue, userEmailValue, userPhoneValue) } }
+        }
     }
 
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        return view
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun setupMVP() {
@@ -93,5 +98,13 @@ class Profile : Fragment(), ProfileMVP.View {
         editFieldValue.isFocusableInTouchMode = false
         editFieldValue.isClickable = false
         editFieldChangeStatus.setImageResource(R.drawable.ic_edit)
+    }
+
+    override fun showSnack(text: String){
+        view?.let { Snackbar.make(it, text, Snackbar.LENGTH_SHORT).show() }
+    }
+
+    override fun moveToQuotes() {
+        view?.let { Navigation.findNavController(it).navigate(R.id.quotes) }
     }
 }
