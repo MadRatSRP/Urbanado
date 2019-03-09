@@ -11,8 +11,8 @@ class QuotesPresenter(private var qv: QuotesMVP.View,
         qv.showQuotes(quotes)
     }
 
-    override fun getData(context: Context) {
-        /*qr.getQuotesListObservable(context)?.subscribe ({ response->
+    override fun getData(context: Context, token: String) {
+        qr.getQuotesListObservable(context, token)?.subscribe ({ response->
             updateQuotes(response)
             //logd("Запрос успешно получен")
             //sv.showSnack("Успешно получены данные")
@@ -25,6 +25,6 @@ class QuotesPresenter(private var qv: QuotesMVP.View,
         }, { error ->
             error.printStackTrace()
             //sv.showSnack("Проверьте подключение к интернету.")
-        })*/
+        })
     }
 }

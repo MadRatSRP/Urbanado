@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.BuildConfig
 
-fun Fragment.logd(message: String){
+fun Any.logd(message: String){
     if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, message)
 }
 fun Fragment.snack(text: String) {

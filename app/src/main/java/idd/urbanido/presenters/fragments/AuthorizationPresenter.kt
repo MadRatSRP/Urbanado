@@ -9,32 +9,28 @@ import idd.urbanido.model.authorization.Authorization
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ui.util.logd
 
 class AuthorizationPresenter(private var av: AuthorizationMVP.View,
                              private var ar: AuthorizationMVP.Repository): AuthorizationMVP.Presenter {
 
     override fun authorizeUser(context: Context, email: EditText, password: EditText) {
-        getData(context, Authorization(Authorization.Auth(email.text.toString(),
-                password.text.toString())))
+        getData(context,
+                Authorization(Authorization.Auth(email.text.toString(),
+                                                 password.text.toString())))
     }
 
     override fun getData(context: Context, authorization: Authorization) {
-
         ar.authorizeUserCall(context, authorization)?.enqueue(object: Callback<AuthorizationResponse>{
             override fun onResponse(call: Call<AuthorizationResponse>,
                                     response: Response<AuthorizationResponse>) {
-                Log.i("Response", response.body().toString())
-
                 if (response.isSuccessful){
                     if (response.body() != null){
-                        Log.i("onSuccess", response.body().toString())
-
                         val token: String = response.body().toString()
+                        logd("Response is: $token")
 
                         av.saveToken(token.substring(26, token.length - 1))
-
                         av.showSnack("Вы были успешно авторизованы")
-
                         av.moveToQuotes()
                     }else{
                         Log.i("onEmptyResponse", "Returned empty response")

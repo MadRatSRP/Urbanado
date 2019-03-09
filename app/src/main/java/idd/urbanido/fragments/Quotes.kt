@@ -15,6 +15,7 @@ import idd.urbanido.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_quotes.*
 import kotlinx.android.synthetic.main.fragment_quotes.view.*
 import ui.util.linearManager
+import ui.util.logd
 
 class Quotes: Fragment(), QuotesMVP.View {
     private var quotesAdapter: QuotesAdapter? = null
@@ -27,6 +28,10 @@ class Quotes: Fragment(), QuotesMVP.View {
 
         recyclerViewQuotes.linearManager()
 
+        var myApplication = MyApplication.instance
+        var token = myApplication.releaseToken()
+        token?.let { logd(it) }
+
         /*usersShowUserInformation.setOnClickListener {
             //    context?.let { usersPresenter?.getUserInformation(it) }
         }
@@ -35,20 +40,16 @@ class Quotes: Fragment(), QuotesMVP.View {
             context?.let { usersPresenter?.getUsersList(it) }
         }*/
 
-        context?.let { quotesPresenter?.getData(it) }
+        context?.let { token?.let { it1 -> quotesPresenter?.getData(it, it1) } }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quotes, container, false)
 
-        //val myApplication: MyApplication = MyApplication()
-
         val myArguments = arguments?.let { QuotesArgs.fromBundle(it).token }
 
-        //myArguments?.let { myApplication.saveToken(it) }
-
-        view.token.text = myArguments
+        //view.token.text = myArguments
 
         context?.let { quotesAdapter = QuotesAdapter(it) }
 

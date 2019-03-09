@@ -18,17 +18,17 @@ interface NetworkInterface {
             : Call<AuthorizationResponse>
 
     @GET("api/v1/users/{id}/edit")
-    fun getProfile(@Header("Authorization") token: String, @Path("id") id: String)
+    fun getProfile(@Header("Authorization") token: String,
+                   @Path("id") id: String)
             : Observable<ProfileResponse>
 
-    @GET("api/v1/users")
-    fun getQuotesList(): Observable<List<QuotesResponse>>
+    @GET("api/v1/financial_instruments")
+    fun getQuotesList(@Header("Authorization") token: String)
+            : Observable<List<QuotesResponse>>
 
     @PUT("api/v1/users/{id}")
-    fun changeProfileData(@Path("id") id: String, @Body profileResponse: ProfileResponse)
+    fun changeProfileData(@Header("Authorization") token: String,
+                          @Path("id") id: String,
+                          @Body profileResponse: ProfileResponse)
             : Observable<ProfileResponse>
-
-
-
-
 }

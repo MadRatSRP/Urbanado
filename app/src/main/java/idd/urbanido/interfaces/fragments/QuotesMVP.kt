@@ -1,7 +1,6 @@
 package idd.urbanido.interfaces.fragments
 
 import android.content.Context
-import idd.urbanido.model.ProfileResponse
 import idd.urbanido.model.QuotesResponse
 import io.reactivex.Observable
 
@@ -15,10 +14,10 @@ interface QuotesMVP {
 
     interface Presenter {
         fun updateQuotes(quotes: List<QuotesResponse>)
-        fun getData(context: Context)
+        fun getData(context: Context, token: String)
     }
 
     interface Repository {
-        fun getQuotesListObservable(context: Context): Observable<List<QuotesResponse>>?
+        fun getQuotesListObservable(context: Context, token: String): Observable<List<QuotesResponse>>?
     }
 }
