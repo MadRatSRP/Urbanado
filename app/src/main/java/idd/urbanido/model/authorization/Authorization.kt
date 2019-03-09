@@ -1,6 +1,6 @@
-package idd.urbanido.model
+package idd.urbanido.model.authorization
 
-data class AuthorizationResponse(
+data class Authorization(
         val auth: Auth
 ) {
     data class Auth(

@@ -11,10 +11,10 @@ import idd.urbanido.interfaces.fragments.QuotesMVP
 import idd.urbanido.model.QuotesResponse
 import idd.urbanido.presenters.fragments.QuotesPresenter
 import idd.urbanido.repositories.QuotesRepository
+import idd.urbanido.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_quotes.*
 import kotlinx.android.synthetic.main.fragment_quotes.view.*
 import ui.util.linearManager
-import ui.util.logd
 
 class Quotes: Fragment(), QuotesMVP.View {
     private var quotesAdapter: QuotesAdapter? = null
@@ -42,7 +42,11 @@ class Quotes: Fragment(), QuotesMVP.View {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quotes, container, false)
 
+        //val myApplication: MyApplication = MyApplication()
+
         val myArguments = arguments?.let { QuotesArgs.fromBundle(it).token }
+
+        //myArguments?.let { myApplication.saveToken(it) }
 
         view.token.text = myArguments
 

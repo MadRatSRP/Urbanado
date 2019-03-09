@@ -10,6 +10,7 @@ import idd.urbanido.R
 import idd.urbanido.interfaces.fragments.ProfileMVP
 import idd.urbanido.presenters.fragments.ProfilePresenter
 import idd.urbanido.repositories.ProfileRepository
+import idd.urbanido.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_profile.*
 import ui.util.logd
 
@@ -21,11 +22,11 @@ class Profile : Fragment(), ProfileMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        var string = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTIxNTQwNDMsInN1YiI6MjF9.W3QfDbwMDIr9ULgEMLfj_CbmtIYH9MJwnMgYZvit9pg"
+        var myApplication = MyApplication.instance
 
-        //var authorization = Authorization()
+        var string = myApplication.releaseToken()
 
-        //authorization.token?.let { logd(it) }
+        token.text = string
 
         context?.let { string?.let { it1 -> profilePresenter?.getData(it, it1) } }
 

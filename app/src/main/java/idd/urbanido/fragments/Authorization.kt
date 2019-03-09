@@ -12,6 +12,7 @@ import idd.urbanido.R
 import idd.urbanido.interfaces.fragments.AuthorizationMVP
 import idd.urbanido.presenters.fragments.AuthorizationPresenter
 import idd.urbanido.repositories.AuthorizationRepository
+import idd.urbanido.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_authorization.*
 
 class Authorization: Fragment(), AuthorizationMVP.View {
@@ -51,6 +52,10 @@ class Authorization: Fragment(), AuthorizationMVP.View {
     }
 
     override fun moveToQuotes() {
+        val myApplication = MyApplication.instance
+
+        token?.let { myApplication.saveToken(it) }
+
         val action = token?.let { AuthorizationDirections.actionAuthorizationToQuotes(it) }
 
         action?.let { view?.let { it1 -> Navigation.findNavController(it1).navigate(it) } }

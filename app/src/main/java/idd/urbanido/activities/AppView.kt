@@ -21,7 +21,7 @@ class AppView : AppCompatActivity(), AppMVP.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app)
 
-        val navController = Navigation.findNavController(this, R.id.activityFragmentContainer)
+        val navController = Navigation.findNavController(this, R.id.navHostFragment)
 
         drawerLayout = findViewById(R.id.drawer_layout)
 
@@ -49,13 +49,6 @@ class AppView : AppCompatActivity(), AppMVP.View {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    /*override fun setUp() {
-        setMVP()
-        //setSupportActionBar(toolbar)
-        //getSupportActionBar().setTitle("AppMain");
-        //appPresenter!!.addFragment(MapView())
-    }*/
 
     override fun setMVP() {
         appPresenter = AppPresenter(this)
