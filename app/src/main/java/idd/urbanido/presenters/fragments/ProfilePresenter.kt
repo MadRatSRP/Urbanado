@@ -3,7 +3,7 @@ package idd.urbanido.presenters.fragments
 import android.content.Context
 import android.widget.EditText
 import idd.urbanido.interfaces.fragments.ProfileMVP
-import idd.urbanido.model.profile.Profile
+import idd.urbanido.model.profile.ProfileResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,20 +11,19 @@ import ui.util.logd
 
 class ProfilePresenter(private var pv: ProfileMVP.View,
                        private var pr: ProfileMVP.Repository): ProfileMVP.Presenter {
-    override fun updateProfile(name: String, email: String, password: String, phone: String) {
-        pv.showProfile(name, email, password, phone)
+    override fun updateProfile(name: String, email: String, phone: String) {
+        pv.showProfile(name, email, phone)
     }
 
     override fun setProfile(context: Context, token: String, name: EditText, email: EditText, phone: EditText) {
-        sendProfile(context, token, Profile(name.text.toString(),
+        sendProfile(context, token, ProfileResponse(name.text.toString(),
                                             email.text.toString(),
                                             phone.text.toString()))
     }
 
-    override fun getData(context: Context, token: String) {
-        pr.getProfileObservable(context, token)?.subscribe ({ response->
-            updateProfile(response.name, response.email,
-                       response.password, response.phone)
+    override fun getData(context: Context, id: String, token: String) {
+        pr.getProfileObservable(context, id, token)?.subscribe ({ response->
+            updateProfile(response.name, response.email, response.phone)
             //logd("Запрос успешно получен")
             //sv.showSnack("Успешно получены данные")
 
@@ -39,10 +38,10 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
         })
     }
 
-    override fun sendProfile(context: Context, token: String, profile: Profile) {
-        pr.updateProfileCall(context, token, profile)?.enqueue(object: Callback<Profile> {
-            override fun onResponse(call: Call<Profile>,
-                                    response: Response<Profile>) {
+    override fun sendProfile(context: Context, token: String, profileResponse: ProfileResponse) {
+        pr.updateProfileCall(context, token, profileResponse)?.enqueue(object: Callback<ProfileResponse> {
+            override fun onResponse(call: Call<ProfileResponse>,
+                                    response: Response<ProfileResponse>) {
                 if (response.isSuccessful){
                     if (response.body() != null){
                         val rep: String = response.body().toString()
@@ -58,7 +57,7 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
                     pv.showSnack("Пустые поля/При авторизации произошла ошибка")
                 }
             }
-            override fun onFailure(call: Call<Profile>, t: Throwable) {
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                 pv.showSnack("Проверьте соединение к интернету")
             }
         })

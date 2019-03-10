@@ -7,7 +7,7 @@
         <item android:id="@+id/authorization"
             android:title="@string/titleAuthorization" />
 
-        <item android:id="@+id/profile"
+        <item android:id="@+id/profileResponse"
             android:title="@string/titleProfile" />
 
         <item android:id="@+id/quotes"

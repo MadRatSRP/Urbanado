@@ -26,11 +26,14 @@ class Profile : Fragment(), ProfileMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        var myApplication = MyApplication.instance
-        var token = myApplication.releaseToken()
-        token?.let { logd(it) }
+        val myApplication = MyApplication.instance
+        val token = myApplication.releaseToken()
+        logd("Токен пользователя получен: $token")
+        val id = myApplication.releaseId().toString()
+        logd("ID пользователя получен: $id")
 
-        context?.let { token?.let { it1 -> profilePresenter?.getData(it, it1) } }
+        context?.let { token?.let { it1 ->
+            profilePresenter?.getData(it, id, it1) } }
 
         var editNameBool = true
         var editEmailBool = true
@@ -84,7 +87,7 @@ class Profile : Fragment(), ProfileMVP.View {
     override fun setupMVP() {
         profilePresenter = ProfilePresenter(this, ProfileRepository())
     }
-    override fun showProfile(name: String, email: String, password: String, phone: String) {
+    override fun showProfile(name: String, email: String, phone: String) {
         userNameValue.setText(name)
         userEmailValue.setText(email)
         userPhoneValue.setText(phone)

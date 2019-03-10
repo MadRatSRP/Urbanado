@@ -22,7 +22,7 @@
             app:destination="@id/registration" />
     </fragment>
     <fragment
-        android:id="@+id/profile"
+        android:id="@+id/profileResponse"
         android:name="idd.urbanido.fragments.Profile"
         android:label="@string/titleProfile"
         tools:layout="@layout/fragment_profile" />

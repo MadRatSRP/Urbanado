@@ -3,7 +3,6 @@ package idd.urbanido.network
 import idd.urbanido.model.*
 import idd.urbanido.model.authorization.Authorization
 import idd.urbanido.model.authorization.AuthorizationResponse
-import idd.urbanido.model.profile.Profile
 import idd.urbanido.model.profile.ProfileResponse
 import io.reactivex.Observable
 import retrofit2.Call
@@ -39,14 +38,14 @@ interface NetworkInterface {
 
 
     //PROFILE
-    @GET("api/v1/users/{id}/edit")
+    @GET("api/v1/users/:{id}/edit")
     fun getProfile(@Header("Authorization") token: String,
                    @Path("id") id: String)
             : Observable<ProfileResponse>
 
-    @PUT("api/v1/users/{id}/edit")
+    @PUT("api/v1/users/:{id}/edit")
     fun updateProfile(@Header("Authorization") token: String,
                       @Path("id") id: String,
-                      @Body profile: Profile)
-            : Call<Profile>
+                      @Body profileResponse: ProfileResponse)
+            : Call<ProfileResponse>
 }
