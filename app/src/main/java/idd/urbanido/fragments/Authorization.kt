@@ -14,6 +14,7 @@ import idd.urbanido.presenters.fragments.AuthorizationPresenter
 import idd.urbanido.repositories.AuthorizationRepository
 import idd.urbanido.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_authorization.*
+import ui.util.logd
 
 class Authorization: Fragment(), AuthorizationMVP.View {
 
@@ -55,6 +56,8 @@ class Authorization: Fragment(), AuthorizationMVP.View {
         val myApplication = MyApplication.instance
 
         token?.let { myApplication.saveToken(it) }
+
+        logd(id.toString())
 
         val action = token?.let { AuthorizationDirections.actionAuthorizationToQuotes(it) }
 

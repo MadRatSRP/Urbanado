@@ -11,6 +11,11 @@ import retrofit2.http.*
 
 interface NetworkInterface {
 
+    //GET_USER_ID
+    @GET("api/v1/current_user")
+    fun getUserId(@Header("Authorization") token: String)
+            : Observable<IdResponse>
+
     //QUOTES
     @GET("api/v1/financial_instruments")
     fun getQuotesList(@Header("Authorization") token: String)
@@ -20,7 +25,7 @@ interface NetworkInterface {
     @GET("api/v1/financial_instruments/{id}")
     fun getProfileQuote(@Header("Authorization") token: String,
                         @Path("id") id: String)
-            : Observable<ProfileQuoteResponse>
+            : Observable<List<ProfileQuoteResponse>>
 
     //REGISTRATION
     @POST("api/v1/users")

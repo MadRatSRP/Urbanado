@@ -1,10 +1,12 @@
 package idd.urbanido.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.R
 import idd.urbanido.adapters.QuotesAdapter
 import idd.urbanido.interfaces.fragments.QuotesMVP
@@ -18,6 +20,9 @@ import ui.util.linearManager
 import ui.util.logd
 
 class Quotes: Fragment(), QuotesMVP.View {
+    private var id: Int? = null
+    private var myApplication: MyApplication? = null
+
     private var quotesAdapter: QuotesAdapter? = null
 
     private var quotesPresenter: QuotesPresenter? = null
@@ -28,9 +33,9 @@ class Quotes: Fragment(), QuotesMVP.View {
 
         recyclerViewQuotes.linearManager()
 
-        var myApplication = MyApplication.instance
-        var token = myApplication.releaseToken()
-        token?.let { logd(it) }
+        myApplication = MyApplication.instance
+        var token = myApplication!!.releaseToken()
+        logd("Токен пользователя получен: $token")
 
         /*usersShowUserInformation.setOnClickListener {
             //    context?.let { usersPresenter?.getUserInformation(it) }
@@ -41,6 +46,8 @@ class Quotes: Fragment(), QuotesMVP.View {
         }*/
 
         context?.let { token?.let { it1 -> quotesPresenter?.getData(it, it1) } }
+
+        context?.let { token?.let { it1 -> quotesPresenter?.getId(it, it1) } }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -62,8 +69,19 @@ class Quotes: Fragment(), QuotesMVP.View {
         quotesPresenter = QuotesPresenter(this, QuotesRepository())
     }
 
+    override fun saveId(id: Int) {
+        this.id = id
+        logd("ID пользователя следующий: " + this.id.toString())
+
+        myApplication?.saveId(id)
+    }
+
     override fun showQuotes(quotes: List<QuotesResponse>) {
          quotesAdapter?.updateQuotesList(quotes)
          recyclerViewQuotes.adapter = quotesAdapter
+    }
+
+    override fun showSnack(text: String){
+        view?.let { Snackbar.make(it, text, Snackbar.LENGTH_SHORT).show() }
     }
 }

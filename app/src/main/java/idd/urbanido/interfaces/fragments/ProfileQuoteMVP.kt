@@ -6,12 +6,16 @@ import io.reactivex.Observable
 
 interface ProfileQuoteMVP {
     interface View {
+        fun setupMVP()
+        fun showProfileQuote(avprice: String, date: String)
     }
 
     interface Presenter {
+        fun updateProfileQuote(list: List<ProfileQuoteResponse>)
+        fun getData(context: Context, token: String)
     }
 
     interface Repository {
-        fun getProfileQuoteObservable(context: Context, token: String): Observable<ProfileQuoteResponse>?
+        fun getProfileQuoteObservable(context: Context, token: String): Observable<List<ProfileQuoteResponse>>?
     }
 }

@@ -2,8 +2,10 @@ package idd.urbanido.interfaces.fragments
 
 import android.content.Context
 import android.widget.EditText
+import idd.urbanido.model.IdResponse
 import idd.urbanido.model.authorization.AuthorizationResponse
 import idd.urbanido.model.authorization.Authorization
+import io.reactivex.Observable
 import retrofit2.Call
 
 interface AuthorizationMVP {
