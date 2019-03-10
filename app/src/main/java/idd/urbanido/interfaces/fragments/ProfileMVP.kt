@@ -21,17 +21,19 @@ interface ProfileMVP {
 
     interface Presenter {
         fun updateProfile(name: String, email: String, phone: String)
-        fun setProfile(context: Context, token: String,
+        fun setProfile(context: Context, id: String, token: String,
                        name: EditText, email: EditText, phone: EditText)
 
         fun getData(context: Context, id: String, token: String)
-        fun sendProfile(context: Context, token: String, profileResponse: ProfileResponse)
+        fun sendProfile(context: Context, id: String,
+                        token: String, profileResponse: ProfileResponse)
     }
 
     interface Repository {
         fun getProfileObservable(context: Context, id: String, token: String)
                 : Observable<ProfileResponse>?
-        fun updateProfileCall(context: Context, token: String, profileResponse: ProfileResponse)
+        fun updateProfileCall(context: Context, id: String,
+                              token: String, profileResponse: ProfileResponse)
                 : Call<ProfileResponse>?
     }
 }

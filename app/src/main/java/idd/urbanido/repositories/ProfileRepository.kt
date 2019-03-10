@@ -19,9 +19,10 @@ class ProfileRepository: ProfileMVP.Repository {
                 ?.observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun updateProfileCall(context: Context, token: String, profileResponse: ProfileResponse)
+    override fun updateProfileCall(context: Context, id: String,
+                                   token: String, profileResponse: ProfileResponse)
             : Call<ProfileResponse>? {
         return NetworkClient.getRetrofit(context)?.create<NetworkInterface>(NetworkInterface::class.java)
-                ?.updateProfile(token, "21", profileResponse)
+                ?.updateProfile(token, id, profileResponse)
     }
 }

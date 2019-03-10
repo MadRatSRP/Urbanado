@@ -15,10 +15,11 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
         pv.showProfile(name, email, phone)
     }
 
-    override fun setProfile(context: Context, token: String, name: EditText, email: EditText, phone: EditText) {
-        sendProfile(context, token, ProfileResponse(name.text.toString(),
-                                            email.text.toString(),
-                                            phone.text.toString()))
+    override fun setProfile(context: Context, id: String,
+                            token: String, name: EditText, email: EditText, phone: EditText) {
+        sendProfile(context, token,
+                    id, ProfileResponse(name.text.toString(),
+                                        email.text.toString(), phone.text.toString()))
     }
 
     override fun getData(context: Context, id: String, token: String) {
@@ -38,8 +39,9 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
         })
     }
 
-    override fun sendProfile(context: Context, token: String, profileResponse: ProfileResponse) {
-        pr.updateProfileCall(context, token, profileResponse)?.enqueue(object: Callback<ProfileResponse> {
+    override fun sendProfile(context: Context, id: String,
+                             token: String, profileResponse: ProfileResponse) {
+        pr.updateProfileCall(context, token, id, profileResponse)?.enqueue(object: Callback<ProfileResponse> {
             override fun onResponse(call: Call<ProfileResponse>,
                                     response: Response<ProfileResponse>) {
                 if (response.isSuccessful){

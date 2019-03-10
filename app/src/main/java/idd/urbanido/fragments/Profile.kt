@@ -67,16 +67,13 @@ class Profile : Fragment(), ProfileMVP.View {
             }
         }
 
-        token?.let { logd(it) }
-
         updateProfileData.setOnClickListener {
             context?.let { it1 ->
                 token?.let { it2 ->
-                    profilePresenter?.setProfile(it1, it2, userNameValue, userEmailValue, userPhoneValue) } }
+                    profilePresenter?.setProfile(it1, id, it2,
+                                                 userNameValue, userEmailValue, userPhoneValue) } }
         }
     }
-
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
