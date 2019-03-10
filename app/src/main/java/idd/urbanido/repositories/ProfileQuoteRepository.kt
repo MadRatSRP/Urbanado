@@ -10,9 +10,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ProfileQuoteRepository: ProfileQuoteMVP.Repository {
-    override fun getProfileQuoteObservable(context: Context, token: String): Observable<List<ProfileQuoteResponse>>? {
+    override fun getProfileQuoteObservable(context: Context, id: String, token: String)
+            : Observable<List<ProfileQuoteResponse>>? {
         return NetworkClient.getRetrofit(context)?.create<NetworkInterface>(NetworkInterface::class.java)
-                ?.getProfileQuote(token, "1")
+                ?.getProfileQuote(token, id)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
     }

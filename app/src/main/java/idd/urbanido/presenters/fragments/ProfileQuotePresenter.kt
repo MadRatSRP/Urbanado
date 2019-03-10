@@ -12,8 +12,8 @@ class ProfileQuotePresenter(private var pv: ProfileQuoteMVP.View,
         //logd(list.toString())
     }
 
-    override fun getData(context: Context, token: String) {
-        pr.getProfileQuoteObservable(context, token)?.subscribe ({ response->
+    override fun getData(context: Context, id: String, token: String) {
+        pr.getProfileQuoteObservable(context, id, token)?.subscribe ({ response->
             //updateProfileQuote(response, response.date)
             updateProfileQuote(response)
             //logd("Запрос успешно получен")

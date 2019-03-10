@@ -12,10 +12,11 @@ interface ProfileQuoteMVP {
 
     interface Presenter {
         fun updateProfileQuote(list: List<ProfileQuoteResponse>)
-        fun getData(context: Context, token: String)
+        fun getData(context: Context, id: String, token: String)
     }
 
     interface Repository {
-        fun getProfileQuoteObservable(context: Context, token: String): Observable<List<ProfileQuoteResponse>>?
+        fun getProfileQuoteObservable(context: Context, id: String, token: String)
+                : Observable<List<ProfileQuoteResponse>>?
     }
 }

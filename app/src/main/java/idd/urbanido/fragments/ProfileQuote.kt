@@ -26,7 +26,7 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
 
         var myApplication = MyApplication.instance
         var token = myApplication.releaseToken()
-        token?.let { logd(it) }
+        logd("Токен пользователя получен: $token")
 
         context?.let { token?.let { it1 -> profileQuotePresenter?.getData(it, it1) } }
     }

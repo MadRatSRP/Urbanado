@@ -22,7 +22,7 @@ interface NetworkInterface {
             : Observable<List<QuotesResponse>>
 
     //PROFILE_QUOTE
-    @GET("api/v1/financial_instruments/{id}")
+    @GET("api/v1/financial_instruments/:{id}")
     fun getProfileQuote(@Header("Authorization") token: String,
                         @Path("id") id: String)
             : Observable<List<ProfileQuoteResponse>>
