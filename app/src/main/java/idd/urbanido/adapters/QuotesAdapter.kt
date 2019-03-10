@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -28,16 +29,16 @@ class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAd
     }
 
     override fun onBindViewHolder(holder: UsersHolder, position: Int) {
+        holder.id.text = quotes[position].id
         holder.name.text = quotes[position].name
+        holder.curprice.text = quotes[position].curprice
 
-        holder.name.setOnClickListener {v->
+        holder.button.setOnClickListener {v->
             var bundle = Bundle()
             bundle.putString("title", holder.name.text.toString())
 
             Navigation.findNavController(v).navigate(R.id.profileQuote, bundle)
         }
-
-        holder.price.text = quotes[position].price
     }
 
     override fun getItemCount(): Int {
@@ -46,7 +47,9 @@ class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAd
 
     inner class UsersHolder internal constructor(view: View):
                 RecyclerView.ViewHolder(view) {
+        internal val id: TextView = view.findViewById(R.id.idValue)
         internal val name: TextView = view.findViewById(R.id.nameValue)
-        internal val price: TextView = view.findViewById(R.id.priceValue)
+        internal val curprice: TextView = view.findViewById(R.id.curpriceValue)
+        internal val button: ImageButton = view.findViewById(R.id.toQuoteProfile)
     }
 }
