@@ -2,7 +2,8 @@ package idd.urbanido.repositories
 
 import android.content.Context
 import idd.urbanido.interfaces.fragments.ProfileQuoteMVP
-import idd.urbanido.model.ProfileQuoteResponse
+import idd.urbanido.model.profile_quote.PercentResponse
+import idd.urbanido.model.profile_quote.ProfileQuoteResponse
 import idd.urbanido.network.NetworkClient
 import idd.urbanido.network.NetworkInterface
 import io.reactivex.Observable
@@ -14,6 +15,14 @@ class ProfileQuoteRepository: ProfileQuoteMVP.Repository {
             : Observable<List<ProfileQuoteResponse>>? {
         return NetworkClient.getRetrofit(context)?.create<NetworkInterface>(NetworkInterface::class.java)
                 ?.getProfileQuote(token, id)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+    }
+    override fun getQuotePercentObservable(context: Context, token: String, id: String,
+                                           start_date: String, finish_date: String)
+            : Observable<String>? {
+        return NetworkClient.getRetrofit(context)?.create<NetworkInterface>(NetworkInterface::class.java)
+                ?.getQuotePercent(token, id, start_date, finish_date)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
     }

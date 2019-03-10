@@ -1,4 +1,4 @@
-package idd.urbanido.model
+package idd.urbanido.model.profile_quote
 
 data class ProfileQuoteResponse(
         val avprice: Double,

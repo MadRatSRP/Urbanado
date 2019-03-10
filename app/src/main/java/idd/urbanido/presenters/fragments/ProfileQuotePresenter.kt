@@ -1,16 +1,27 @@
 package idd.urbanido.presenters.fragments
 
 import android.content.Context
+import android.widget.EditText
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import idd.urbanido.interfaces.fragments.ProfileQuoteMVP
+import idd.urbanido.model.profile_quote.PercentResponse
 
 
 class ProfileQuotePresenter(private var pv: ProfileQuoteMVP.View,
                             private var pr: ProfileQuoteMVP.Repository): ProfileQuoteMVP.Presenter {
     override fun updateProfileQuote(entries: ArrayList<BarEntry>, labels: ArrayList<String>) {
         pv.showProfileQuote(entries, labels)
+    }
+
+    fun getPercent(context: Context, token: String, id: String,
+                   start_date: EditText, finish_date: EditText) {
+        /*var percentResponse = PercentResponse(start_date.text.toString(),
+                                              finish_date.text.toString())*/
+        getPercentStatistic(context, token, id,
+                            start_date.text.toString(),
+                            finish_date.text.toString())
     }
 
     override fun getData(context: Context, id: String, token: String) {
@@ -88,6 +99,15 @@ class ProfileQuotePresenter(private var pv: ProfileQuoteMVP.View,
         }, { error ->
             error.printStackTrace()
             //sv.showSnack("Проверьте подключение к интернету.")
+        })
+    }
+
+    fun getPercentStatistic(context: Context, token: String, id: String,
+                            start_date: String, finish_date: String) {
+        pr.getQuotePercentObservable(context, token, id, start_date, finish_date)?.subscribe ({ response->
+
+        }, {error->
+            error.printStackTrace()
         })
     }
 }

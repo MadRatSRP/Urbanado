@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import idd.urbanido.R
 import idd.urbanido.interfaces.fragments.ProfileQuoteMVP
+import idd.urbanido.model.profile_quote.PercentResponse
 import idd.urbanido.presenters.fragments.ProfileQuotePresenter
 import idd.urbanido.repositories.ProfileQuoteRepository
 import idd.urbanido.util.MyApplication
@@ -43,6 +44,13 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         context?.let { quoteId?.let { it1 ->
             token?.let { it2 ->
                 profileQuotePresenter?.getData(it, it1, it2) } } }
+
+        showResult.setOnClickListener {
+            context?.let { it1 ->
+                token?.let { it2 -> quoteId?.let { it3 ->
+                    profileQuotePresenter?.getPercent(it1, it2, it3, start_date, finish_date) } }
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -2,7 +2,8 @@ package idd.urbanido.interfaces.fragments
 
 import android.content.Context
 import com.github.mikephil.charting.data.BarEntry
-import idd.urbanido.model.ProfileQuoteResponse
+import idd.urbanido.model.profile_quote.PercentResponse
+import idd.urbanido.model.profile_quote.ProfileQuoteResponse
 import io.reactivex.Observable
 
 interface ProfileQuoteMVP {
@@ -19,5 +20,8 @@ interface ProfileQuoteMVP {
     interface Repository {
         fun getProfileQuoteObservable(context: Context, id: String, token: String)
                 : Observable<List<ProfileQuoteResponse>>?
+        fun getQuotePercentObservable(context: Context, token: String, id: String,
+                                      start_date: String, finish_date: String)
+                : Observable<String>?
     }
 }
