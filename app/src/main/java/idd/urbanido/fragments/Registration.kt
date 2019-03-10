@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.R
 import idd.urbanido.interfaces.fragments.RegistrationMVP
 import idd.urbanido.presenters.fragments.RegistrationPresenter
@@ -38,5 +39,13 @@ class Registration : Fragment(), RegistrationMVP.View {
 
     override fun setupMVP() {
         registrationPresenter = RegistrationPresenter(this, RegistrationRepository())
+    }
+
+    override fun moveToAuthorization() {
+        view?.let { Navigation.findNavController(it).navigate(R.id.authorization) }
+    }
+
+    override fun showSnack(text: String){
+        view?.let { Snackbar.make(it, text, Snackbar.LENGTH_LONG).show() }
     }
 }

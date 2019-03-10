@@ -3,11 +3,14 @@ package idd.urbanido.interfaces.fragments
 import android.content.Context
 import android.widget.EditText
 import idd.urbanido.model.RegistrationResponse
+import okhttp3.ResponseBody
 import retrofit2.Call
 
 interface RegistrationMVP {
     interface View {
         fun setupMVP()
+        fun moveToAuthorization()
+        fun showSnack(text: String)
     }
 
     interface Presenter {
@@ -19,6 +22,6 @@ interface RegistrationMVP {
 
     interface Repository {
         fun registerUserCall(context: Context, registrationResponse: RegistrationResponse)
-                : Call<RegistrationResponse>?
+                : Call<ResponseBody>?
     }
 }

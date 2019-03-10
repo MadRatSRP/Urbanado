@@ -51,7 +51,7 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
                         logd("Response is: $rep")
 
                         pv.showSnack("Вы успешно обновили профиль")
-                        pv.moveToQuotes()
+                        pv.moveToAuthorization()
                     }else{
                         logd("Returned empty response")
                         pv.showSnack("При авторизации произошла ошибка")

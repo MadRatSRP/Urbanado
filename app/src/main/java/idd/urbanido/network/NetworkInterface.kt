@@ -30,7 +30,7 @@ interface NetworkInterface {
     //REGISTRATION
     @POST("api/v1/users")
     fun registerUser(@Body registrationResponse: RegistrationResponse)
-            : Call<RegistrationResponse>
+            : Call<ResponseBody>
 
     //AUTHORIZATION
     @POST("api/v1/user_token")
