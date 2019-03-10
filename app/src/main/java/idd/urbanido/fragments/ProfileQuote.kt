@@ -24,18 +24,24 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
+        val quoteId = arguments?.let { ProfileQuoteArgs.fromBundle(it).id }
+        logd("ID акции получен: $quoteId")
+
         var myApplication = MyApplication.instance
         var token = myApplication.releaseToken()
         logd("Токен пользователя получен: $token")
 
-        context?.let { token?.let { it1 -> profileQuotePresenter?.getData(it, it1) } }
+        context?.let { quoteId?.let { it1 ->
+            token?.let { it2 ->
+                profileQuotePresenter?.getData(it, it1, it2) } } }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val bundle = arguments
+        val title = arguments?.let { ProfileQuoteArgs.fromBundle(it).title }
+        logd("Title акции получен: $title")
 
-        (activity as AppCompatActivity).supportActionBar?.title = bundle?.getString("title")
+        (activity as AppCompatActivity).supportActionBar?.title = title
         val view = inflater.inflate(R.layout.fragment_profile_quote, container, false)
 
         return view

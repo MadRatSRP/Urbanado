@@ -57,7 +57,7 @@ class Authorization: Fragment(), AuthorizationMVP.View {
 
         token?.let { myApplication.saveToken(it) }
 
-        logd(id.toString())
+        //logd(id.toString())
 
         val action = token?.let { AuthorizationDirections.actionAuthorizationToQuotes(it) }
 

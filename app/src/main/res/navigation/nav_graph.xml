@@ -46,6 +46,10 @@
         tools:layout="@layout/fragment_profile_quote" >
         <argument
             android:name="title"
+            app:argType="string"
+            android:defaultValue="hello" />
+        <argument
+            android:name="id"
             app:argType="string" />
     </fragment>
 </navigation>

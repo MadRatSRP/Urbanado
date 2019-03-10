@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import idd.urbanido.R
+import idd.urbanido.fragments.QuotesDirections
 import idd.urbanido.model.QuotesResponse
 
 class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAdapter.UsersHolder>() {
@@ -34,10 +35,14 @@ class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAd
         holder.curprice.text = quotes[position].curprice
 
         holder.button.setOnClickListener {v->
-            var bundle = Bundle()
+            /*var bundle = Bundle()
             bundle.putString("title", holder.name.text.toString())
 
-            Navigation.findNavController(v).navigate(R.id.profileQuote, bundle)
+            Navigation.findNavController(v).navigate(R.id.profileQuote, bundle)*/
+
+            val action = QuotesDirections.actionQuotesToProfileQuote(holder.name.text.toString(),
+                                                                     holder.id.text.toString())
+            Navigation.findNavController(v).navigate(action)
         }
     }
 
