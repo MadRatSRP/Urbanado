@@ -95,6 +95,8 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         barChart.data = data
 
 
+
+
         barChart.setDescription("Set Bar Chart Description")  // set the description
 
         //barDataSet.setColors(ColorTemplate.COLORFUL_COLORS)
