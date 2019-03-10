@@ -5,6 +5,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import idd.urbanido.model.profile.ProfileResponse
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 import retrofit2.Call
 
 interface ProfileMVP {

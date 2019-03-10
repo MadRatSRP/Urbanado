@@ -5,6 +5,7 @@ import idd.urbanido.model.authorization.Authorization
 import idd.urbanido.model.authorization.AuthorizationResponse
 import idd.urbanido.model.profile.ProfileResponse
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -21,7 +22,7 @@ interface NetworkInterface {
             : Observable<List<QuotesResponse>>
 
     //PROFILE_QUOTE
-    @GET("api/v1/financial_instruments/:{id}")
+    @GET("api/v1/financial_instruments/{id}")
     fun getProfileQuote(@Header("Authorization") token: String,
                         @Path("id") id: String)
             : Observable<List<ProfileQuoteResponse>>
@@ -36,14 +37,13 @@ interface NetworkInterface {
     fun authorizeUser(@Body authorization: Authorization)
             : Call<AuthorizationResponse>
 
-
     //PROFILE
-    @GET("api/v1/users/:{id}/edit")
+    @GET("api/v1/users/{id}/edit")
     fun getProfile(@Header("Authorization") token: String,
                    @Path("id") id: String)
             : Observable<ProfileResponse>
 
-    @PUT("api/v1/users/:{id}/edit")
+    @PUT("api/v1/users/{id}")
     fun updateProfile(@Header("Authorization") token: String,
                       @Path("id") id: String,
                       @Body profileResponse: ProfileResponse)

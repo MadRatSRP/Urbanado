@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.EditText
 import idd.urbanido.interfaces.fragments.ProfileMVP
 import idd.urbanido.model.profile.ProfileResponse
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,7 +45,7 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
         pr.updateProfileCall(context, token, id, profileResponse)?.enqueue(object: Callback<ProfileResponse> {
             override fun onResponse(call: Call<ProfileResponse>,
                                     response: Response<ProfileResponse>) {
-                if (response.isSuccessful){
+                /*if (response.isSuccessful){
                     if (response.body() != null){
                         val rep: String = response.body().toString()
                         logd("Response is: $rep")
@@ -57,10 +58,10 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
                     }
                 } else {
                     pv.showSnack("Пустые поля/При авторизации произошла ошибка")
-                }
+                }*/
             }
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                pv.showSnack("Проверьте соединение к интернету")
+                //pv.showSnack("Проверьте соединение к интернету")
             }
         })
     }

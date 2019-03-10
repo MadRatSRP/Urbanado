@@ -8,6 +8,7 @@ import idd.urbanido.network.NetworkInterface
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
 import retrofit2.Call
 
 class ProfileRepository: ProfileMVP.Repository {
