@@ -9,7 +9,7 @@ import io.reactivex.Observable
 interface ProfileQuoteMVP {
     interface View {
         fun setupMVP()
-        fun drawChart(array1: ArrayList<BarEntry>, array2: ArrayList<String>)
+        fun drawChart(entries: ArrayList<BarEntry>, labels: ArrayList<String>)
         fun returnPercent(result_str: String)
 
         fun showSnack(text: String)

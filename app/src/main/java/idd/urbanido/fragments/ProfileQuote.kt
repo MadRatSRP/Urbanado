@@ -1,5 +1,8 @@
 package idd.urbanido.fragments
 
+import android.app.DatePickerDialog
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +10,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -19,14 +21,10 @@ import idd.urbanido.repositories.ProfileQuoteRepository
 import idd.urbanido.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_profile_quote.*
 import ui.util.logd
+import java.util.*
 
 class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
     private var profileQuotePresenter: ProfileQuotePresenter? = null
-
-    //var arrayListEntry: ArrayList<Entry>? = null
-    //var arrayListString: ArrayList<String>? = null
-
-    private var mChart: LineChart? = null
 
     //companion object { val instance = ProfileQuote() }
 
@@ -45,6 +43,54 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
             token?.let { it2 ->
                 profileQuotePresenter?.getData(it, it1, it2) } } }
 
+        start_date.setOnClickListener {
+            val mcurrentDate = Calendar.getInstance()
+            var mYear = mcurrentDate.get(Calendar.YEAR)
+            var mMonth = mcurrentDate.get(Calendar.MONTH)
+            var mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH)
+
+            val mDatePicker = DatePickerDialog(context!!,
+                    { _, selectedyear, selectedmonth, selectedday ->
+
+                        val myCalendar = Calendar.getInstance()
+                        myCalendar.set(Calendar.YEAR, selectedyear)
+                        myCalendar.set(Calendar.MONTH, selectedmonth)
+                        myCalendar.set(Calendar.DAY_OF_MONTH, selectedday)
+                        val myFormat = "20yyMMdd" //Change as you need
+                        val sdf = SimpleDateFormat(myFormat, Locale.FRANCE)
+                        start_date.text = sdf.format(myCalendar.time)
+
+                        mDay = selectedday
+                        mMonth = selectedmonth
+                        mYear = selectedyear
+                    }, mYear, mMonth, mDay)
+            mDatePicker.show()
+        }
+
+        finish_date.setOnClickListener {
+            val mcurrentDate = Calendar.getInstance()
+            var mYear = mcurrentDate.get(Calendar.YEAR)
+            var mMonth = mcurrentDate.get(Calendar.MONTH)
+            var mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH)
+
+            val mDatePicker = DatePickerDialog(context!!,
+                    { _, selectedyear, selectedmonth, selectedday ->
+
+                        val myCalendar = Calendar.getInstance()
+                        myCalendar.set(Calendar.YEAR, selectedyear)
+                        myCalendar.set(Calendar.MONTH, selectedmonth)
+                        myCalendar.set(Calendar.DAY_OF_MONTH, selectedday)
+                        val myFormat = "20yyMMdd" //Change as you need
+                        val sdf = SimpleDateFormat(myFormat, Locale.FRANCE)
+                        finish_date.text = sdf.format(myCalendar.time)
+
+                        mDay = selectedday
+                        mMonth = selectedmonth
+                        mYear = selectedyear
+                    }, mYear, mMonth, mDay)
+            mDatePicker.show()
+        }
+
         showResult.setOnClickListener {
             context?.let { it1 ->
                 token?.let { it2 -> quoteId?.let { it3 ->
@@ -59,7 +105,6 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         logd("Title акции получен: $title")
 
         (activity as AppCompatActivity).supportActionBar?.title = title
-        val view = inflater.inflate(R.layout.fragment_profile_quote, container, false)
 
         /*mChart?.findViewById<LineChart>(idd.urbanido.R.id.chart)
         mChart?.setDrawGridBackground(false)
@@ -78,7 +123,7 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         val l = mChart?.legend
         l?.form = Legend.LegendForm.LINE*/
 
-        return view
+        return inflater.inflate(R.layout.fragment_profile_quote, container, false)
     }
 
     override fun setupMVP() {
@@ -93,7 +138,7 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         mChart?.data = data
         mChart?.invalidate()*/
 
-        var barDataSet = BarDataSet(entries, "Значения")
+        val barDataSet = BarDataSet(entries, "Значения")
         val data = BarData(labels, barDataSet)
 
 
@@ -105,7 +150,7 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         barChart.setDescription("Акции")  // set the description
 
         //barDataSet.setColors(ColorTemplate.COLORFUL_COLORS)
-        barDataSet.color = context?.let { ContextCompat.getColor(it, R.color.colorAccent) }!!;
+        barDataSet.color = context?.let { ContextCompat.getColor(it, R.color.colorAccent) }!!
 
         barChart.animateY(6000)
     }
