@@ -42,26 +42,25 @@ class ProfilePresenter(private var pv: ProfileMVP.View,
 
     override fun sendProfile(context: Context, id: String,
                              token: String, profileResponse: ProfileResponse) {
-        pr.updateProfileCall(context, token, id, profileResponse)?.enqueue(object: Callback<ProfileResponse> {
-            override fun onResponse(call: Call<ProfileResponse>,
-                                    response: Response<ProfileResponse>) {
-                /*if (response.isSuccessful){
+        pr.updateProfileCall(context, token, id, profileResponse)?.enqueue(object: Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>,
+                                    response: Response<ResponseBody>) {
+                if (response.isSuccessful){
                     if (response.body() != null){
                         val rep: String = response.body().toString()
                         logd("Response is: $rep")
 
-                        pv.showSnack("Вы успешно обновили профиль")
-                        pv.moveToAuthorization()
+                        pv.showSnack("Изменения успешно сохранены")
                     }else{
                         logd("Returned empty response")
                         pv.showSnack("При авторизации произошла ошибка")
                     }
                 } else {
                     pv.showSnack("Пустые поля/При авторизации произошла ошибка")
-                }*/
+                }
             }
-            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                //pv.showSnack("Проверьте соединение к интернету")
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                pv.showSnack("Проверьте соединение к интернету")
             }
         })
     }

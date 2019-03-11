@@ -30,7 +30,7 @@ class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAd
     }
 
     override fun onBindViewHolder(holder: UsersHolder, position: Int) {
-        holder.id.text = quotes[position].id
+        //holder.id.text = quotes[position].id
         holder.name.text = quotes[position].name
         holder.curprice.text = quotes[position].curprice
 
@@ -41,7 +41,7 @@ class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAd
             Navigation.findNavController(v).navigate(R.id.profileQuote, bundle)*/
 
             val action = QuotesDirections.actionQuotesToProfileQuote(holder.name.text.toString(),
-                                                                     holder.id.text.toString())
+                                                                     quotes[position].id)
             Navigation.findNavController(v).navigate(action)
         }
     }
@@ -52,7 +52,6 @@ class QuotesAdapter(private val context: Context): RecyclerView.Adapter<QuotesAd
 
     inner class UsersHolder internal constructor(view: View):
                 RecyclerView.ViewHolder(view) {
-        internal val id: TextView = view.findViewById(R.id.idValue)
         internal val name: TextView = view.findViewById(R.id.nameValue)
         internal val curprice: TextView = view.findViewById(R.id.curpriceValue)
         internal val button: ImageButton = view.findViewById(R.id.toQuoteProfile)

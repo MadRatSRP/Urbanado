@@ -30,7 +30,7 @@ interface NetworkInterface {
                         @Path("id") id: String,
                         @Query("start_date") start_date: String,
                         @Query("finish_date") finish_date: String)
-            : Observable<String>
+            : Observable<Jojo>
     //REGISTRATION
     @POST("api/v1/users")
     fun registerUser(@Body registrationResponse: RegistrationResponse)
@@ -48,5 +48,5 @@ interface NetworkInterface {
     fun updateProfile(@Header("Authorization") token: String,
                       @Path("id") id: String,
                       @Body profileResponse: ProfileResponse)
-            : Call<ProfileResponse>
+            : Call<ResponseBody>
 }

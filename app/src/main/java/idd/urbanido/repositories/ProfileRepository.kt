@@ -22,7 +22,7 @@ class ProfileRepository: ProfileMVP.Repository {
 
     override fun updateProfileCall(context: Context, id: String,
                                    token: String, profileResponse: ProfileResponse)
-            : Call<ProfileResponse>? {
+            : Call<ResponseBody>? {
         return NetworkClient.getRetrofit(context)?.create<NetworkInterface>(NetworkInterface::class.java)
                 ?.updateProfile(token, id, profileResponse)
     }

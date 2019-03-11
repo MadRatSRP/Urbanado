@@ -11,9 +11,9 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.google.android.material.snackbar.Snackbar
 import idd.urbanido.R
 import idd.urbanido.interfaces.fragments.ProfileQuoteMVP
-import idd.urbanido.model.profile_quote.PercentResponse
 import idd.urbanido.presenters.fragments.ProfileQuotePresenter
 import idd.urbanido.repositories.ProfileQuoteRepository
 import idd.urbanido.util.MyApplication
@@ -85,7 +85,7 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         profileQuotePresenter = ProfileQuotePresenter(this, ProfileQuoteRepository())
     }
 
-    override fun showProfileQuote(entries: ArrayList<BarEntry>, labels: ArrayList<String>) {
+    override fun drawChart(entries: ArrayList<BarEntry>, labels: ArrayList<String>) {
         /*val set1 = LineDataSet(arrayListEntry, "NAV Data Value")
         set1.lineWidth = 1.5f
         set1.circleRadius = 4f
@@ -93,7 +93,7 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
         mChart?.data = data
         mChart?.invalidate()*/
 
-        var barDataSet = BarDataSet(entries, "Cells")
+        var barDataSet = BarDataSet(entries, "Значения")
         val data = BarData(labels, barDataSet)
 
 
@@ -102,14 +102,19 @@ class ProfileQuote: Fragment(), ProfileQuoteMVP.View {
 
         barChart.data = data
 
-
-
-
-        barChart.setDescription("Set Bar Chart Description")  // set the description
+        barChart.setDescription("Акции")  // set the description
 
         //barDataSet.setColors(ColorTemplate.COLORFUL_COLORS)
         barDataSet.color = context?.let { ContextCompat.getColor(it, R.color.colorAccent) }!!;
 
-        barChart.animateY(5000)
+        barChart.animateY(6000)
+    }
+
+    override fun returnPercent(result_str: String) {
+        result.text = result_str
+    }
+
+    override fun showSnack(text: String) {
+        view?.let { Snackbar.make(it, text, Snackbar.LENGTH_SHORT).show() }
     }
 }

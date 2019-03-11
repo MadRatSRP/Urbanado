@@ -4,88 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
     android:layout_marginBottom="20dp">
     <LinearLayout
-        android:id="@+id/lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/text"
-            android:layout_width="114dp"
+        <TextView
+            android:id="@+id/nameValue"
+            android:textStyle="bold|italic"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/idText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ID:"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/nameText"
-                android:layout_width="147dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Username:"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/curpriceText"
-                android:layout_width="102dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="80dp"
-                android:layout_weight="1"
-                android:text="Current price:"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/values"
-            android:layout_width="255dp"
+            android:layout_weight="0.8" />
+        <TextView
+            android:id="@+id/curpriceValue"
+            android:layout_marginStart="30dp"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/idValue"
-                android:layout_width="126dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/nameValue"
-                android:layout_width="127dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/curpriceValue"
-                android:layout_width="126dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </LinearLayout>
-
+            android:layout_weight="1" />
+        <ImageButton
+            android:id="@+id/toQuoteProfile"
+            android:layout_marginStart="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_keyboard_arrow_right"
+            android:layout_weight="1"/>
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/toQuoteProfile"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_keyboard_arrow_right"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@id/lay"
-        app:layout_constraintTop_toTopOf="@id/lay"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

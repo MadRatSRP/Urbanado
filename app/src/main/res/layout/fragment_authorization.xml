@@ -10,6 +10,7 @@
     android:layout_marginTop="56dp">
     <EditText
         android:id="@+id/email"
+        android:hint="Email: "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,6 +19,7 @@
 
     <EditText
         android:id="@+id/password"
+        android:hint="Пароль: "
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package idd.urbanido.interfaces.fragments
 
 import android.content.Context
 import idd.urbanido.model.IdResponse
+import idd.urbanido.model.Jojo
 import idd.urbanido.model.QuotesResponse
 import io.reactivex.Observable
 

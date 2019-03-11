@@ -35,6 +35,6 @@ interface ProfileMVP {
                 : Observable<ProfileResponse>?
         fun updateProfileCall(context: Context, id: String,
                               token: String, profileResponse: ProfileResponse)
-                : Call<ProfileResponse>?
+                : Call<ResponseBody>?
     }
 }
