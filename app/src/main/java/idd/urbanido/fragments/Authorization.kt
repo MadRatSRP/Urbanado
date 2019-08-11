@@ -28,7 +28,6 @@ class Authorization: Fragment(), AuthorizationMVP.View {
 
         authorizeUser.setOnClickListener {
             context?.let {
-
                 authorizationPresenter?.authorizeUser(it, email, password)
             }
         }

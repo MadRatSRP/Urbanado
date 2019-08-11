@@ -62,6 +62,12 @@ class Quotes: Fragment(), QuotesMVP.View {
 
         view.recyclerViewQuotes.adapter = quotesAdapter
 
+        /*List<String> list = new List<String>
+        list.add("Треугольник")
+        list.add("Квадрат")
+        list.add("Прямоугольник")
+        quotesAdapter.updateQuotesList(list)*/
+
         return view
     }
 

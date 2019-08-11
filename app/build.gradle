@@ -29,49 +29,65 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Chucker
+    ext.chucker = "2.0.4"
+    // Glide
+    ext.glide = "4.9.0"
+    // MPAndroidChart
+    ext.chart = "v2.2.4"
+    // AppCompat
+    ext.appcompat = '1.1.0-rc01'
+    // Material (for Navigation Drawer)
+    ext.material = '1.1.0-alpha09'
+    // ConstraintLayout
+    ext.constraint = '2.0.0-beta2'
+    // Java Scalars Converter
+    ext.scalars = '2.6.1'
+    // Retrofit
+    ext.retrofit = '2.6.1'
+    // RxAndroid
+    ext.rx_android = '2.1.1'
+    // OkHTTP
+    ext.okhttp = '4.0.1'
 
-    //MPAndroidChart
-    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
-
-    //Navigation Architecture Component
+    // Chucker
+    debugImplementation "com.github.ChuckerTeam.Chucker:library:$chucker"
+    releaseImplementation "com.github.ChuckerTeam.Chucker:library-no-op:$chucker"
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    // Navigation Architecture Component
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
+    // MPAndroidChart
+    implementation "com.github.PhilJay:MPAndroidChart:$chart"
+    // AppCompat
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    // Material (for Navigation Drawer)
+    implementation "com.google.android.material:material:$material"
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:$constraint"
+    // Java Scalars Converter
+    implementation "com.squareup.retrofit2:converter-scalars:$scalars"
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android"
+    // OkHTTP + Logging Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
 
-    //Navigation Drawer
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0-rc01'
-
-    //ConstraintLayout
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-
-    //Java Scalars Converter
-    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
-
-    //Glide
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation "com.squareup.retrofit2:converter-gson:2.5.0"
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-
-    // RxAndroid + OkHTTP + Logging Interceptor
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
-
-    //Chuck
-    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
-    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
-    mavenCentral()
-
     jcenter()
 
-    //MPAndroidChart
+    // MPAndroidChart, Chucker
     maven { url 'https://jitpack.io' }
+
+    // Glide
+    mavenCentral()
+    google()
 }
